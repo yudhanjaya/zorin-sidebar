@@ -1775,9 +1775,9 @@ export const SidebarAddAppsIcon = GObject.registerClass(
 
             const [width, height] = area.get_surface_size();
             const s = Math.min(width, height);
-            const arm = s * 0.28;
+            const arm = s * 0.20;
             const cx = s / 2;
-            const lineWidth = Math.max(2.5, s / 11);
+            const lineWidth = Math.max(2.2, s / 13);
 
             const node = area.get_theme_node();
             const fg = node.get_foreground_color();
