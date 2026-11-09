@@ -721,7 +721,7 @@
     #zorin-sidebarContainer.left #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-left: 2px;
+      padding-left: 6px;
       padding-right: 2px; }
       #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.left #dash .dash-item-container .show-apps:first-child,
@@ -1046,7 +1046,7 @@
     #zorin-sidebarContainer.right #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-right: 2px;
+      padding-right: 6px;
       padding-left: 2px; }
       #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.right #dash .dash-item-container .show-apps:first-child,
