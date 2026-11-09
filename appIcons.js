@@ -1746,12 +1746,8 @@ const SidebarAddAppsMenu = class SidebarAddAppsMenu extends PopupMenu.PopupMenu 
     }
 };
 
-export const SidebarAddAppsIcon = GObject.registerClass({
-    Signals: {
-        'menu-state-changed': {param_types: [GObject.TYPE_BOOLEAN]},
-        'sync-tooltip': {},
-    },
-}, class SidebarAddAppsIcon extends DockShowAppsIcon {
+export const SidebarAddAppsIcon = GObject.registerClass(
+{}, class SidebarAddAppsIcon extends DockShowAppsIcon {
     _createIcon(size) {
         this._iconActor = new St.Icon({
             icon_name: 'list-add-symbolic',

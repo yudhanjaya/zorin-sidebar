@@ -330,7 +330,7 @@ export const DockDash = GObject.registerClass({
         this._addAppsIcon.icon.setIconSize(this.iconSize);
         this._addAppsIcon.x_expand = false;
         this._addAppsIcon.y_expand = false;
-        this._addAppsIcon.setLabelText(__('Add apps'));
+        this._addAppsIcon.setLabelText('Add apps');
         if (!this._isHorizontal)
             this._addAppsIcon.y_align = Clutter.ActorAlign.START;
         this._addAppsIconHoverId = this._addAppsIcon.connect('notify::hover', a => {
