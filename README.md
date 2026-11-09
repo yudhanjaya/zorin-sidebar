@@ -9,8 +9,10 @@ I build and test agent, harness and UI apps for work on
 [Shoggoth](https://github.com/yudhanjaya/Shoggoth). That means a rotating cast
 of short-lived tools and demos pinned to my dash for a day or an hour. It
 annoyed me to have these sometimes ephemeral things cluttering up my dash,
-especially when I couldn't remember their names sometimes. This extension
-gives them a place of their own: a sidebar of just the apps I choose to pin,
+especially when I couldn't remember their names sometimes. 
+
+This extension
+gives a sidebar of just the apps I choose to pin,
 completely separate from my real dash.
 
 ## What it is
