@@ -1646,19 +1646,17 @@ const SidebarAddAppsMenuScrollSection = class SidebarAddAppsMenuScrollSection
     constructor() {
         super();
 
-        const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
-        const monitor = Main.layoutManager.primaryMonitor;
-        const maxHeight = monitor?.height
-            ? Math.floor(monitor.height * 0.6 / scaleFactor)
-            : 480;
+        // Fixed height with a permanent scrollbar so the search field and
+        // menu edges don't jump around when filtering narrows the list.
+        const fixedHeight = 420;
 
         this.actor = new St.ScrollView({
             hscrollbar_policy: St.PolicyType.NEVER,
-            vscrollbar_policy: St.PolicyType.AUTOMATIC,
+            vscrollbar_policy: St.PolicyType.ALWAYS,
             child: this.box,
             clip_to_allocation: true,
             style_class: 'zorin-sidebar-add-scroll',
-            style: `max-height: ${maxHeight}px;`,
+            style: `height: ${fixedHeight}px; min-height: ${fixedHeight}px; max-height: ${fixedHeight}px;`,
         });
         this.actor._delegate = this;
     }
