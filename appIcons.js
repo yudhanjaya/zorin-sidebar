@@ -1748,6 +1748,18 @@ const SidebarAddAppsMenu = class SidebarAddAppsMenu extends PopupMenu.PopupMenu 
 
 export const SidebarAddAppsIcon = GObject.registerClass(
 {}, class SidebarAddAppsIcon extends DockShowAppsIcon {
+    _init(position) {
+        super._init(position);
+        // Clicking the tile opens our picker (right-click also works via the base class)
+        this.toggleButton.connect('clicked', () => {
+            try {
+                this.popupMenu();
+            } catch (e) {
+                console.error('zorin-sidebar: could not open picker', e);
+            }
+        });
+    }
+
     _createIcon(size) {
         this._iconActor = new St.Icon({
             icon_name: 'list-add-symbolic',
@@ -1757,6 +1769,7 @@ export const SidebarAddAppsIcon = GObject.registerClass(
         });
         return this._iconActor;
     }
+
 
     popupMenu() {
         if (!this._hasPopupMenu())
