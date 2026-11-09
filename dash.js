@@ -312,10 +312,6 @@ export const DockDash = GObject.registerClass({
         this._showAppsIcon.icon.setIconSize(this.iconSize);
         this._showAppsIcon.x_expand = false;
         this._showAppsIcon.y_expand = false;
-        this._addAppsIconHoverId = this._addAppsIcon.connect('notify::hover', a => {
-            if (this._addAppsIcon.get_parent() === this._boxContainer)
-                this._ensureItemVisibility(a);
-        });
         this.showAppsButton.connect('notify::hover', a => {
             if (this._showAppsIcon.get_parent() === this._boxContainer)
                 this._ensureItemVisibility(a);
@@ -337,6 +333,10 @@ export const DockDash = GObject.registerClass({
         this._addAppsIcon.setLabelText(__('Add apps'));
         if (!this._isHorizontal)
             this._addAppsIcon.y_align = Clutter.ActorAlign.START;
+        this._addAppsIconHoverId = this._addAppsIcon.connect('notify::hover', a => {
+            if (this._addAppsIcon.get_parent() === this._boxContainer)
+                this._ensureItemVisibility(a);
+        });
         this._hookUpLabel(this._addAppsIcon);
         this._addAppsIcon.connect('menu-state-changed', (_icon, opened) => {
             this._itemMenuStateChanged(this._addAppsIcon, opened);
