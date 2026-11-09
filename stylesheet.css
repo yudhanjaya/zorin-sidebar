@@ -17,7 +17,7 @@
     height: 0;
     margin-bottom: 4px; }
   #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer {
-    padding: 10px;
+    padding: 4px 2px;
     padding-bottom: 0;
     padding-top: 0; }
     #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -96,7 +96,7 @@
     height: 0;
     margin-bottom: 4px; }
   #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer {
-    padding: 3px;
+    padding: 2px 2px;
     padding-bottom: 0;
     padding-top: 0; }
     #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -358,7 +358,7 @@
     height: 0;
     margin-top: 4px; }
   #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer {
-    padding: 10px;
+    padding: 4px 2px;
     padding-top: 0;
     padding-bottom: 0; }
     #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -437,7 +437,7 @@
     height: 0;
     margin-top: 4px; }
   #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer {
-    padding: 3px;
+    padding: 2px 2px;
     padding-top: 0;
     padding-bottom: 0; }
     #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -699,7 +699,7 @@
     margin: 4px 0;
     margin-left: 4px; }
   #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer {
-    padding: 10px;
+    padding: 4px 2px;
     padding-left: 0;
     padding-right: 0; }
     #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -722,7 +722,7 @@
     #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
       padding-left: 14px;
-      padding-right: 10px; }
+      padding-right: 6px; }
       #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.left #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile:first-child {
@@ -752,7 +752,7 @@
 
 #zorin-sidebarContainer.left.fixed #dash .dash-item-container .app-well-app,
 #zorin-sidebarContainer.left.fixed #dash .dash-item-container .show-apps {
-  padding-right: 14px; }
+  padding-right: 6px; }
 
 .dash-label.left {
   margin: 0;
@@ -774,7 +774,7 @@
     margin: 1px 0;
     margin-left: 4px; }
   #zorin-sidebarContainer.left.shrink #dash #zorin-sidebarDashContainer {
-    padding: 3px;
+    padding: 2px 2px;
     padding-left: 0;
     padding-right: 0; }
     #zorin-sidebarContainer.left.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -880,8 +880,8 @@
     #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-left: 10px;
-      padding-right: 10px; }
+      padding-left: 6px;
+      padding-right: 6px; }
       #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile:first-child {
@@ -911,7 +911,7 @@
 
 #zorin-sidebarContainer.left.extended.fixed #dash .dash-item-container .app-well-app,
 #zorin-sidebarContainer.left.extended.fixed #dash .dash-item-container .show-apps {
-  padding-right: 10px; }
+  padding-right: 6px; }
 
 .dash-label.left {
   margin: 0;
@@ -1024,7 +1024,7 @@
     margin: 4px 0;
     margin-right: 4px; }
   #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer {
-    padding: 10px;
+    padding: 4px 2px;
     padding-right: 0;
     padding-left: 0; }
     #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -1046,8 +1046,8 @@
     #zorin-sidebarContainer.right #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-right: 14px;
-      padding-left: 10px; }
+      padding-right: 6px;
+      padding-left: 6px; }
       #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.right #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile:first-child {
@@ -1099,7 +1099,7 @@
     margin: 1px 0;
     margin-right: 4px; }
   #zorin-sidebarContainer.right.shrink #dash #zorin-sidebarDashContainer {
-    padding: 3px;
+    padding: 2px 2px;
     padding-right: 0;
     padding-left: 0; }
     #zorin-sidebarContainer.right.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -1205,8 +1205,8 @@
     #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-right: 10px;
-      padding-left: 10px; }
+      padding-right: 6px;
+      padding-left: 6px; }
       #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile:first-child {
@@ -1236,7 +1236,7 @@
 
 #zorin-sidebarContainer.right.extended.fixed #dash .dash-item-container .app-well-app,
 #zorin-sidebarContainer.right.extended.fixed #dash .dash-item-container .show-apps {
-  padding-left: 10px; }
+  padding-left: 6px; }
 
 .dash-label.right {
   margin: 0;
