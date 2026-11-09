@@ -1249,35 +1249,7 @@ export const DockDash = GObject.registerClass({
 
         addedItems.forEach(({item}) => item.show(animate));
 
-        // This will update the size, and the corresponding number for each icon
-        this._updateNumberOverlay();
-
         this.updateShowAppsButton();
-    }
-
-    _updateNumberOverlay() {
-        const appIcons = this.getAppIcons();
-        let counter = 1;
-        appIcons.forEach(icon => {
-            if (counter < 10) {
-                icon.setNumberOverlay(counter);
-                counter++;
-            } else if (counter === 10) {
-                icon.setNumberOverlay(0);
-                counter++;
-            } else {
-                // No overlay after 10
-                icon.setNumberOverlay(-1);
-            }
-            icon.updateNumberOverlay();
-        });
-    }
-
-    toggleNumberOverlay(activate) {
-        const appIcons = this.getAppIcons();
-        appIcons.forEach(icon => {
-            icon.toggleNumberOverlay(activate);
-        });
     }
 
     _initializeIconSize(maxSize) {

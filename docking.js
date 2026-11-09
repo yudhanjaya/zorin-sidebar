@@ -1554,18 +1554,13 @@ const KeyboardShortcuts = class ZorinSidebarKeyboardShortcuts {
     _optionalNumberOverlay() {
         const {settings} = DockManager;
         this._shortcutIsSet = false;
-        // Enable extra shortcut if either 'overlay' or 'show-dock' are true
-        if (settings.hotKeys &&
-           (settings.hotkeysOverlay || settings.hotkeysShowDock))
+        // Enable extra shortcut if 'show-dock' is true
+        if (settings.hotKeys && settings.hotkeysShowDock)
             this._enableExtraShortcut();
 
         this._signalsHandler.add([
             settings,
             'changed::hot-keys',
-            this._checkHotkeysOptions.bind(this),
-        ], [
-            settings,
-            'changed::hotkeys-overlay',
             this._checkHotkeysOptions.bind(this),
         ], [
             settings,
@@ -1577,8 +1572,7 @@ const KeyboardShortcuts = class ZorinSidebarKeyboardShortcuts {
     _checkHotkeysOptions() {
         const {settings} = DockManager;
 
-        if (settings.hotKeys &&
-           (settings.hotkeysOverlay || settings.hotkeysShowDock))
+        if (settings.hotKeys && settings.hotkeysShowDock)
             this._enableExtraShortcut();
         else
             this._disableExtraShortcut();
@@ -1609,9 +1603,6 @@ const KeyboardShortcuts = class ZorinSidebarKeyboardShortcuts {
         docks.forEach(dock => {
             const {dash} = dock;
 
-            if (DockManager.settings.hotkeysOverlay)
-                dash.toggleNumberOverlay(true);
-
             // Show the dock if it is hidden
             if (DockManager.settings.hotkeysShowDock)
                 dock.showDock();
@@ -1633,8 +1624,6 @@ const KeyboardShortcuts = class ZorinSidebarKeyboardShortcuts {
         delete this._numberOverlayTimeoutId;
 
         docks.forEach(dock => {
-            dock.dash.toggleNumberOverlay(false);
-
             // Hide the dock again if necessary
             dock.updateDashVisibility();
         });
