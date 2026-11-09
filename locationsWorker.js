@@ -3,7 +3,7 @@
 import GLib from 'gi://GLib';
 import Gio from 'gi://Gio';
 
-const GJS_SUPPORTS_FILE_IFACE_PROMISES = imports.system.version >= 17101;
+const GJS_SUPPORTS_FILE_IFACE_PROMISES = true; // gjs >= 1.71
 
 if (GJS_SUPPORTS_FILE_IFACE_PROMISES)
     Gio._promisify(Gio.File.prototype, 'query_default_handler_async');
@@ -88,4 +88,5 @@ function main(args) {
     return ret;
 }
 
-imports.system.exit(main(ARGV));
+import System from 'system';
+System.exit(main(ARGV));

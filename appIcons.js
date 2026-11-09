@@ -1632,3 +1632,164 @@ export function itemShowLabel() {
     });
     /* eslint-enable no-invalid-this */
 }
+
+/* =====================================================================
+ * "Add to Sidebar" tile + scrollable app picker menu
+ *
+ * Shows a plus icon at the end of the bar. Clicking it opens a popover
+ * listing every launchable application, pinned ones marked with a
+ * checkmark. Clicking an entry toggles it in the sidebar.
+ * ===================================================================== */
+
+const SidebarAddAppsMenuScrollSection = class SidebarAddAppsMenuScrollSection
+    extends PopupMenu.PopupMenuSection {
+    constructor() {
+        super();
+
+        const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
+        const monitor = Main.layoutManager.primaryMonitor;
+        const maxHeight = monitor?.height
+            ? Math.floor(monitor.height * 0.6 / scaleFactor)
+            : 480;
+
+        this.actor = new St.ScrollView({
+            hscrollbar_policy: St.PolicyType.NEVER,
+            vscrollbar_policy: St.PolicyType.AUTOMATIC,
+            child: this.box,
+            clip_to_allocation: true,
+            style_class: 'zorin-sidebar-add-scroll',
+            style: `max-height: ${maxHeight}px;`,
+        });
+        this.actor._delegate = this;
+    }
+};
+
+const SidebarAddAppsMenu = class SidebarAddAppsMenu extends PopupMenu.PopupMenu {
+    constructor(sourceActor) {
+        const position = Utils.getPosition();
+        const arrowSide = position === St.Side.TOP ? St.Side.TOP
+            : position === St.Side.LEFT ? St.Side.LEFT
+            : position === St.Side.RIGHT ? St.Side.RIGHT
+            : St.Side.BOTTOM;
+
+        super(sourceActor, 0.5, arrowSide);
+        this.actor.add_style_class_name('zorin-sidebar-add-menu');
+
+        const header = new PopupMenu.PopupMenuItem(_('Add to Sidebar'), {
+            reactive: false,
+        });
+        header.add_style_class_name('zorin-sidebar-menu-header');
+
+        this._appsSection = new SidebarAddAppsMenuScrollSection();
+        this.addMenuItem(header);
+        this.addMenuItem(this._appsSection);
+
+        this._rebuild();
+        this.connect('open-state-changed', (_menu, isOpen) => {
+            if (isOpen)
+                this._rebuild();
+        });
+    }
+
+    _rebuild() {
+        this._appsSection.removeAll();
+
+        const pinnedIds = new Set(SidebarApps.getSidebarApps().getFavoriteIds());
+
+        let apps = [];
+        try {
+            const seen = new Set();
+            apps = Gio.AppInfo.get_all().filter((appInfo) => {
+                try {
+                    return appInfo instanceof Gio.DesktopAppInfo
+                        && appInfo.should_show()
+                        && appInfo.get_id()
+                        && !seen.has(appInfo.get_id())
+                        && seen.add(appInfo.get_id());
+                } catch {
+                    return false;
+                }
+            });
+        } catch (e) {
+            console.error('zorin-sidebar: could not list applications', e);
+        }
+
+        apps.sort((a, b) =>
+            (a.get_display_name() ?? '').localeCompare(
+                b.get_display_name() ?? '', undefined, {sensitivity: 'base'}));
+
+        const ornament = (id) => pinnedIds.has(id)
+            ? PopupMenu.Ornament.CHECK
+            : PopupMenu.Ornament.HIDDEN;
+
+        for (const appInfo of apps) {
+            const id = appInfo.get_id();
+            const item = new PopupMenu.PopupImageMenuItem(
+                appInfo.get_display_name() ?? id,
+                appInfo.get_icon(),
+            );
+            item.setOrnament(ornament(id));
+            item.connect('activate', () => {
+                const apps = SidebarApps.getSidebarApps();
+                if (pinnedIds.has(id)) {
+                    apps.removeFavorite(id);
+                    pinnedIds.delete(id);
+                    item.setOrnament(PopupMenu.Ornament.HIDDEN);
+                } else {
+                    apps.addFavorite(id);
+                    pinnedIds.add(id);
+                    item.setOrnament(PopupMenu.Ornament.CHECK);
+                }
+            });
+            this._appsSection.addMenuItem(item);
+        }
+    }
+};
+
+export const SidebarAddAppsIcon = GObject.registerClass({
+    Signals: {
+        'menu-state-changed': {param_types: [GObject.TYPE_BOOLEAN]},
+        'sync-tooltip': {},
+    },
+}, class SidebarAddAppsIcon extends DockShowAppsIcon {
+    _createIcon(size) {
+        this._iconActor = new St.Icon({
+            icon_name: 'list-add-symbolic',
+            icon_size: size,
+            style_class: 'show-apps-icon',
+            track_hover: true,
+        });
+        return this._iconActor;
+    }
+
+    popupMenu() {
+        if (!this._hasPopupMenu())
+            return false;
+
+        this._removeMenuTimeout();
+        this.toggleButton.fake_release();
+
+        if (!this._menu) {
+            this._menu = new SidebarAddAppsMenu(this);
+            this._menu.connect('open-state-changed', (menu, isPoppedUp) => {
+                if (!isPoppedUp)
+                    this._onMenuPoppedDown();
+            });
+            const id = Main.overview.connect('hiding', () => {
+                this._menu.close();
+            });
+            this._menu.actor.connect('destroy', () => {
+                Main.overview.disconnect(id);
+            });
+            this._menuManager.addMenu(this._menu);
+        }
+
+        this.emit('menu-state-changed', true);
+        this.toggleButton.set_hover(true);
+        this._menu.popup();
+        this._menuManager.ignoreRelease?.();
+        this.emit('sync-tooltip');
+
+        return false;
+    }
+});

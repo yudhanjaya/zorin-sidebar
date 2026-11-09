@@ -12,13 +12,13 @@
 
 /* eslint-disable no-unused-vars */
 
-const {signals: Signals} = imports
-
 import Shell from 'gi://Shell'
+
+import { EventEmitter } from 'resource:///org/gnome/shell/misc/signals.js'
 
 let instance = null
 
-export class SidebarApps extends Signals.EventEmitter {
+export class SidebarApps extends EventEmitter {
   constructor(settings) {
     super()
     if (!settings) {

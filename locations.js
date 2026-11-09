@@ -49,7 +49,7 @@ const Labels = Object.freeze({
     WINDOWS_CHANGED: Symbol('windows-changed'),
 });
 
-const GJS_SUPPORTS_FILE_IFACE_PROMISES = imports.system.version >= 17101;
+const GJS_SUPPORTS_FILE_IFACE_PROMISES = true; // gjs >= 1.71 always supports async Gio promises
 
 if (GJS_SUPPORTS_FILE_IFACE_PROMISES) {
     Gio._promisify(Gio.File.prototype, 'query_info_async');

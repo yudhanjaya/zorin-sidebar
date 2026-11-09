@@ -312,6 +312,10 @@ export const DockDash = GObject.registerClass({
         this._showAppsIcon.icon.setIconSize(this.iconSize);
         this._showAppsIcon.x_expand = false;
         this._showAppsIcon.y_expand = false;
+        this._addAppsIconHoverId = this._addAppsIcon.connect('notify::hover', a => {
+            if (this._addAppsIcon.get_parent() === this._boxContainer)
+                this._ensureItemVisibility(a);
+        });
         this.showAppsButton.connect('notify::hover', a => {
             if (this._showAppsIcon.get_parent() === this._boxContainer)
                 this._ensureItemVisibility(a);
@@ -322,7 +326,24 @@ export const DockDash = GObject.registerClass({
         this._showAppsIcon.connect('menu-state-changed', (_icon, opened) => {
             this._itemMenuStateChanged(this._showAppsIcon, opened);
         });
+
+        // Sidebar: a dedicated "+" tile that opens a picker of every
+        // launchable application so pinning doesn't require drag and drop.
+        this._addAppsIcon = new AppIcons.SidebarAddAppsIcon(this._position);
+        this._addAppsIcon.show(false);
+        this._addAppsIcon.icon.setIconSize(this.iconSize);
+        this._addAppsIcon.x_expand = false;
+        this._addAppsIcon.y_expand = false;
+        this._addAppsIcon.setLabelText(__('Add apps'));
+        if (!this._isHorizontal)
+            this._addAppsIcon.y_align = Clutter.ActorAlign.START;
+        this._hookUpLabel(this._addAppsIcon);
+        this._addAppsIcon.connect('menu-state-changed', (_icon, opened) => {
+            this._itemMenuStateChanged(this._addAppsIcon, opened);
+        });
+
         this.updateShowAppsButton();
+        this.updateAddAppsIcon();
 
         this._background = new St.Widget({
             style_class: 'dash-background',
@@ -857,6 +878,7 @@ export const DockDash = GObject.registerClass({
         });
 
         iconChildren.push(this._showAppsIcon);
+        iconChildren.push(this._addAppsIcon);
 
         if (this._maxWidth === -1 && this._maxHeight === -1)
             return;
@@ -932,6 +954,7 @@ export const DockDash = GObject.registerClass({
         this.emit('icon-size-changed');
 
         const scale = oldIconSize / newIconSize;
+        this._addAppsIcon.icon.setIconSize(this.iconSize);
         for (let i = 0; i < iconChildren.length; i++) {
             const {icon} = iconChildren[i].child._delegate;
 
@@ -1314,6 +1337,15 @@ export const DockDash = GObject.registerClass({
         this._maxWidth = maxWidth;
         this._maxHeight = maxHeight;
         this._queueRedisplay();
+    }
+
+    updateAddAppsIcon() {
+        const parent = this._addAppsIcon.get_parent();
+        if (parent)
+            parent.remove_child(this._addAppsIcon);
+
+        this._dashContainer.add_child(this._addAppsIcon);
+        this._addAppsIcon.show(true);
     }
 
     updateShowAppsButton() {
