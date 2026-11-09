@@ -1680,6 +1680,8 @@ const SidebarAddAppsMenu = class SidebarAddAppsMenu extends PopupMenu.PopupMenu 
         });
         header.add_style_class_name('zorin-sidebar-menu-header');
 
+        Main.uiGroup.add_child(this.actor);
+
         this._appsSection = new SidebarAddAppsMenuScrollSection();
         this.addMenuItem(header);
         this.addMenuItem(this._appsSection);
