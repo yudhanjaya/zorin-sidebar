@@ -264,6 +264,7 @@ export const DockDash = GObject.registerClass({
             y_align: Clutter.ActorAlign.CENTER,
             y_expand: this._isHorizontal,
             x_expand: !this._isHorizontal,
+            clip_to_allocation: true,
         });
 
         this._scrollView = new St.ScrollView({
@@ -273,6 +274,7 @@ export const DockDash = GObject.registerClass({
             x_expand: this._isHorizontal,
             y_expand: !this._isHorizontal,
             enable_mouse_scrolling: false,
+            clip_to_allocation: true,
         });
 
         this._scrollView.connect('scroll-event', this._onScrollEvent.bind(this));
@@ -281,12 +283,13 @@ export const DockDash = GObject.registerClass({
             name: 'zorin-sidebarBoxContainer',
             x_align: Clutter.ActorAlign.FILL,
             y_align: Clutter.ActorAlign.FILL,
+            clip_to_allocation: true,
         });
         this._boxContainer.add_style_class_name(Theming.PositionStyleClass[this._position]);
 
         const rtl = Clutter.get_default_text_direction() === Clutter.TextDirection.RTL;
         this._box = new St.BoxLayout({
-            clip_to_allocation: false,
+            clip_to_allocation: true,
             ...!this._isHorizontal ? {layout_manager: new DockDashIconsVerticalLayout()} : {},
             x_align: rtl ? Clutter.ActorAlign.END : Clutter.ActorAlign.START,
             y_align: this._isHorizontal ? Clutter.ActorAlign.CENTER : Clutter.ActorAlign.START,
