@@ -1564,3 +1564,26 @@
 #zorin-sidebarContainer .overview-tile {
   border-radius: 5px;
 }
+
+/* Full-width, square hover/pressed fill for the vertical bars */
+#zorin-sidebarContainer.left #dash .dash-item-container .app-well-app .overview-icon,
+#zorin-sidebarContainer.left #dash .dash-item-container .show-apps .overview-icon,
+#zorin-sidebarContainer.left #dash .dash-item-container .overview-tile .overview-icon,
+#zorin-sidebarContainer.right #dash .dash-item-container .app-well-app .overview-icon,
+#zorin-sidebarContainer.right #dash .dash-item-container .show-apps .overview-icon,
+#zorin-sidebarContainer.right #dash .dash-item-container .overview-tile .overview-icon {
+  border-radius: 0;
+  padding: 8px 4px;
+}
+
+#zorin-sidebarContainer.left #dash .dash-item-container .app-well-app:hover .overview-icon,
+#zorin-sidebarContainer.left #dash .dash-item-container .show-apps:hover .overview-icon,
+#zorin-sidebarContainer.left #dash .dash-item-container .overview-tile:hover .overview-icon,
+#zorin-sidebarContainer.right #dash .dash-item-container .app-well-app:hover .overview-icon,
+#zorin-sidebarContainer.right #dash .dash-item-container .show-apps:hover .overview-icon,
+#zorin-sidebarContainer.right #dash .dash-item-container .overview-tile:hover .overview-icon {
+  border-radius: 0;
+  padding: 8px 4px;
+}
+
+/* Center each icon horizontally in the tile */

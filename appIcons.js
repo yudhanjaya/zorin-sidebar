@@ -1752,6 +1752,29 @@ export const SidebarAddAppsIcon = GObject.registerClass(
 {}, class SidebarAddAppsIcon extends DockShowAppsIcon {
     _init(position) {
         super._init(position);
+
+        // Fill the bar width so hover is a full-width band, not a floating square
+        this.xExpand = true;
+        this.xAlign = Clutter.ActorAlign.FILL;
+
+        const expandChain = (actor) => {
+            if (!actor)
+                return;
+            actor.xExpand = true;
+            // inner layouts centered so the glyph stays put
+            actor.xAlign = Clutter.ActorAlign.FILL;
+            if (actor._box) {
+                actor._box.xExpand = true;
+                actor._box.xAlign = Clutter.ActorAlign.CENTER;
+            }
+            if (actor._iconBin) {
+                actor._iconBin.xExpand = true;
+                actor._iconBin.xAlign = Clutter.ActorAlign.CENTER;
+            }
+        };
+
+        expandChain(this.child);            // toggleButton
+        expandChain(this.icon);             // IconGrid.BaseIcon
         // Clicking the tile opens our picker (right-click also works via the base class)
         this.toggleButton.connect('clicked', () => {
             try {

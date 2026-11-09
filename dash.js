@@ -132,10 +132,14 @@ class DockDashItemContainer extends Dash.DashItemContainer {
     _init(position) {
         super._init();
 
-        if (position === St.Side.TOP || position === St.Side.BOTTOM)
+        if (position === St.Side.TOP || position === St.Side.BOTTOM) {
             this.xExpand = false;
-        else
+            this.xAlign = Clutter.ActorAlign.CENTER;
+        } else {
             this.yExpand = false;
+            this.xExpand = true;
+            this.xAlign = Clutter.ActorAlign.FILL;
+        }
 
         this.label?.add_style_class_name(Theming.PositionStyleClass[position]);
         if (Docking.DockManager.settings.customThemeShrink)
@@ -772,7 +776,23 @@ export const DockDash = GObject.registerClass({
         }, this);
 
         const item = new DockDashItemContainer(this._position);
+        if (this._isHorizontal) {
+            item.xExpand = false;
+            item.xAlign = Clutter.ActorAlign.CENTER;
+        } else {
+            item.xExpand = true;
+            item.xAlign = Clutter.ActorAlign.FILL;
+        }
         item.setChild(appIcon);
+
+        if (this._position !== St.Side.TOP && this._position !== St.Side.BOTTOM) {
+            appIcon.xExpand = true;
+            appIcon.xAlign = Clutter.ActorAlign.FILL;
+            if (appIcon._box)
+                appIcon._box.xExpand = true;
+            if (appIcon._iconBin)
+                appIcon._iconBin.xAlign = Clutter.ActorAlign.CENTER;
+        }
 
         appIcon.connectObject('notify::hover', a => this._ensureItemVisibility(a), this);
         appIcon.connectObject('clicked', actor => {
