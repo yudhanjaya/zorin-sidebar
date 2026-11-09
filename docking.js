@@ -1736,6 +1736,7 @@ const WorkspaceIsolation = class ZorinSidebarWorkspaceIsolation {
 
 export class DockManager extends EventEmitter {
     constructor(extension) {
+        super();
         if (DockManager._singleton) {
             logError(new Error('ZorinSidebar has been already initialized'),
                 'Cleaning up stale instance');
