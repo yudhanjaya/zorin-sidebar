@@ -744,7 +744,11 @@ const DockedDash = GObject.registerClass({
             else
                 this._animateOut(settings.animationTime, 0);
         } else {
-            this._animateOut(settings.animationTime, 0);
+            // The intellihide subsystem has been removed; with neither fixed
+            // nor autohide mode the dock is always visible.
+            this._ignoreHover = false;
+            this._removeAnimations();
+            this._animateIn(settings.animationTime, 0);
         }
     }
 
