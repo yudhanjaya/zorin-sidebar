@@ -30,7 +30,7 @@ export default class ZorinSidebarPreferences extends ExtensionPreferences {
     const apps = new Adw.PreferencesGroup({
       title: 'Pinned apps',
       description:
-        'The sidebar shows only apps you pin. Add apps by dragging them from the app grid onto the bar, or with the + tile at the end of it. Drag icons to reorder. This build hides everything else.',
+        'The sidebar shows only apps you pin, and pins them independently of your overview dash. Pin apps by dragging them from the app grid onto the bar, or right-click an icon in the bar and choose Add to Sidebar. Drag icons to reorder. Nothing else lives here.',
     })
     page.add(apps)
 

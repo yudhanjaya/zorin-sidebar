@@ -5,12 +5,12 @@ import {
     Gio,
     GLib,
     GObject,
+    Meta,
     Shell,
     St,
 } from './dependencies/gi.js';
 
 import {
-    AppFavorites,
     Dash,
     DND,
     Main,
@@ -24,6 +24,7 @@ import {
 import {
     AppIcons,
     Docking,
+    SidebarApps,
     Theming,
     Utils,
 } from './imports.js';
@@ -38,6 +39,87 @@ const Labels = Object.freeze({
     SHOW_MOUNTS: Symbol('show-mounts'),
     FIRST_LAST_CHILD_WORKAROUND: Symbol('first-last-child-workaround'),
 });
+
+const DragPlaceholderItem = GObject.registerClass(
+class DragPlaceholderItem extends St.Widget {
+    _init() {
+        super._init({
+            style_class: 'zorin-sidebar-drag-placeholder',
+            layout_manager: new Clutter.BinLayout(),
+            x_align: Clutter.ActorAlign.CENTER,
+            y_align: Clutter.ActorAlign.CENTER,
+        });
+        this.child = new St.Bin({ style_class: 'placeholder' });
+        this.add_child(this.child);
+        this.animatingOut = false;
+        this.scale_x = 0;
+        this.scale_y = 0;
+        this.opacity = 0;
+    }
+
+    show(animate) {
+        const duration = animate ? DASH_ANIMATION_TIME : 0;
+
+        this.ease({
+            scale_x: 1,
+            scale_y: 1,
+            opacity: 255,
+            duration,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+        });
+    }
+
+    animateOutAndDestroy() {
+        this.animatingOut = true;
+
+        this.ease({
+            scale_x: 0,
+            scale_y: 0,
+            opacity: 0,
+            duration: DASH_ANIMATION_TIME,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            onComplete: () => this.destroy(),
+        });
+    }
+});
+
+const EmptyDropTargetItem = GObject.registerClass(
+class EmptyDropTargetItem extends St.Widget {
+    _init() {
+        super._init({
+            style_class: 'zorin-sidebar-empty-drop-target',
+            layout_manager: new Clutter.BinLayout(),
+        });
+        this.child = new St.Bin({ style_class: 'empty-dash-drop-target' });
+        this.add_child(this.child);
+        this.opacity = 0;
+    }
+
+    show(animate) {
+        this.ease({
+            opacity: 255,
+            duration: animate ? DASH_ANIMATION_TIME : 0,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+        });
+    }
+
+    animateOutAndDestroy() {
+        this.ease({
+            opacity: 0,
+            duration: DASH_ANIMATION_TIME,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+            onComplete: () => this.destroy(),
+        });
+    }
+});
+
+function appsWritable() {
+    try {
+        return Docking.DockManager.settings?.is_writable?.('sidebar-apps') ?? true;
+    } catch {
+        return true;
+    }
+}
 
 /**
  * Extend DashItemContainer
@@ -167,6 +249,7 @@ export const DockDash = GObject.registerClass({
         this._dragPlaceholder = null;
         this._dragPlaceholderPos = -1;
         this._animatingPlaceholdersCount = 0;
+        this._emptyDropTarget = null;
         this._showLabelTimeoutId = 0;
         this._resetHoverTimeoutId = 0;
         this._labelShowing = false;
@@ -275,11 +358,11 @@ export const DockDash = GObject.registerClass({
             this._appSystem,
             'installed-changed',
             () => {
-                AppFavorites.getAppFavorites().reload();
+                SidebarApps.getSidebarApps().reload();
                 this._queueRedisplay();
             },
         ], [
-            AppFavorites.getAppFavorites(),
+            SidebarApps.getSidebarApps(),
             'changed',
             this._queueRedisplay.bind(this),
         ], [
@@ -391,18 +474,107 @@ export const DockDash = GObject.registerClass({
         return Dash.Dash.prototype._syncLabel.call(this, ...args);
     }
 
-    _clearDragPlaceholder(...args) {
-        return Dash.Dash.prototype._clearDragPlaceholder.call(this, ...args);
+    _clearDragPlaceholder() {
+        if (this._dragPlaceholder) {
+            this._animatingPlaceholdersCount++;
+            this._dragPlaceholder.connect('destroy', () => {
+                this._animatingPlaceholdersCount--;
+            });
+            this._dragPlaceholder.animateOutAndDestroy();
+            this._dragPlaceholder = null;
+        }
+        this._dragPlaceholderPos = -1;
     }
 
-    _clearEmptyDropTarget(...args) {
-        return Dash.Dash.prototype._clearEmptyDropTarget.call(this, ...args);
+    _clearEmptyDropTarget() {
+        if (this._emptyDropTarget) {
+            this._emptyDropTarget.animateOutAndDestroy();
+            this._emptyDropTarget = null;
+        }
+    }
+
+    /* SidebarApps-backed replacement for Dash.prototype.handleDragOver.
+     * Inserts a placeholder item at the drop position and returns
+     * COPY_DROP for new pins or MOVE_DROP when reordering an already
+     * pinned app. */
+    _favDragOver(source, actor, x, y, time) {
+        const app = Dash.getAppFromSource(source);
+        if (app == null || app.is_window_backed?.())
+            return DND.DragMotionResult.NO_DROP;
+
+        if (!appsWritable())
+            return DND.DragMotionResult.NO_DROP;
+
+        const favorites = SidebarApps.getSidebarApps().getFavorites();
+        const numFavorites = favorites.length;
+        const favPos = favorites.indexOf(app);
+
+        const children = this._box.get_children();
+        let numChildren = children.length;
+        let boxSize = this._isHorizontal ? this._box.width : this._box.height;
+
+        // Keep the placeholder out of the index calculation
+        if (this._dragPlaceholder) {
+            const size = this._isHorizontal ? this._dragPlaceholder.width : this._dragPlaceholder.height;
+            boxSize -= size;
+            numChildren--;
+        }
+
+        // Same with the separator
+        if (this._separator) {
+            const [, , separatorWidth, separatorHeight] = this._separator.get_preferred_size();
+            boxSize -= this._isHorizontal ? separatorWidth : separatorHeight;
+            numChildren--;
+        }
+
+        let pos;
+        if (this._emptyDropTarget) {
+            pos = 0; // always insert at the start when empty
+        } else if (this.text_direction === Clutter.TextDirection.RTL) {
+            pos = numChildren - Math.floor(x * numChildren / boxSize);
+        } else {
+            pos = Math.floor(x * numChildren / boxSize);
+        }
+
+        if (pos > numFavorites)
+            pos = numFavorites;
+
+        if (pos !== this._dragPlaceholderPos && this._animatingPlaceholdersCount === 0) {
+            this._dragPlaceholderPos = pos;
+
+            // Don't allow positioning before or after self
+            if (favPos !== -1 && (pos === favPos || pos === favPos + 1)) {
+                this._clearDragPlaceholder();
+                return DND.DragMotionResult.CONTINUE;
+            }
+
+            let fadeIn;
+            if (this._dragPlaceholder) {
+                this._dragPlaceholder.destroy();
+                fadeIn = false;
+            } else {
+                fadeIn = true;
+            }
+
+            this._dragPlaceholder = new DragPlaceholderItem();
+            this._dragPlaceholder.child.set_width(this.iconSize);
+            this._dragPlaceholder.child.set_height(this.iconSize / 2);
+            this._box.insert_child_at_index(this._dragPlaceholder, this._dragPlaceholderPos);
+            this._dragPlaceholder.show(fadeIn);
+        }
+
+        if (!this._dragPlaceholder)
+            return DND.DragMotionResult.NO_DROP;
+
+        return favPos !== -1
+            ? DND.DragMotionResult.MOVE_DROP
+            : DND.DragMotionResult.COPY_DROP;
     }
 
     handleDragOver(source, actor, x, y, time) {
         let ret;
         if (this._isHorizontal) {
-            ret = Dash.Dash.prototype.handleDragOver.call(this, source, actor, x, y, time);
+            ret = this._favDragOver(source, actor, x, y, time);
 
             if (ret === DND.DragMotionResult.CONTINUE)
                 return ret;
@@ -418,7 +590,7 @@ export const DockDash = GObject.registerClass({
                 });
             }
 
-            ret = Dash.Dash.prototype.handleDragOver.call(this, source, actor, y, x, time);
+            ret = this._favDragOver(source, actor, y, x, time);
             propertyInjections.destroy();
 
             if (ret === DND.DragMotionResult.CONTINUE)
@@ -427,17 +599,6 @@ export const DockDash = GObject.registerClass({
             if (this._dragPlaceholder) {
                 this._dragPlaceholder.child.set_width(this.iconSize / 2);
                 this._dragPlaceholder.child.set_height(this.iconSize);
-
-                let pos = this._dragPlaceholderPos;
-                if (this._isHorizontal &&
-                    Clutter.get_default_text_direction() === Clutter.TextDirection.RTL)
-                    pos = this._box.get_children() - 1 - pos;
-
-                if (pos !== this._dragPlaceholderPos) {
-                    this._dragPlaceholderPos = pos;
-                    this._box.set_child_at_index(this._dragPlaceholder,
-                        this._dragPlaceholderPos);
-                }
             }
         }
 
@@ -460,8 +621,48 @@ export const DockDash = GObject.registerClass({
         return ret;
     }
 
-    acceptDrop(...args) {
-        return Dash.Dash.prototype.acceptDrop.call(this, ...args);
+    acceptDrop(source, actor, x, y, time) {
+        const app = Dash.getAppFromSource(source);
+        if (app == null || app.is_window_backed?.())
+            return false;
+
+        if (!appsWritable())
+            return false;
+
+        const id = app.get_id();
+        const favorites = SidebarApps.getSidebarApps().getFavoriteMap();
+        const srcIsFavorite = id in favorites;
+
+        let favPos = 0;
+        const children = this._box.get_children();
+        for (let i = 0; i < this._dragPlaceholderPos; i++) {
+            if (this._dragPlaceholder && children[i] === this._dragPlaceholder)
+                continue;
+
+            const childId = children[i].child?._delegate?.app?.get_id?.();
+            if (childId == null || childId === id)
+                continue;
+
+            if (childId in favorites)
+                favPos++;
+        }
+
+        // No placeholder means we don't want to pin the app and we're
+        // dragging it to its own position
+        if (!this._dragPlaceholder)
+            return true;
+
+        const laters = global.compositor.get_laters();
+        laters.add(Meta.LaterType.BEFORE_REDRAW, () => {
+            const apps = SidebarApps.getSidebarApps();
+            if (srcIsFavorite)
+                apps.moveFavoriteToPos(id, favPos);
+            else
+                apps.addFavoriteAtPos(id, favPos);
+            return false;
+        });
+
+        return true;
     }
 
     _onWindowDragBegin(...args) {
@@ -781,7 +982,7 @@ export const DockDash = GObject.registerClass({
         if (!this.mapped)
             return;
 
-        const favorites = AppFavorites.getAppFavorites().getFavoriteMap();
+        const favorites = SidebarApps.getSidebarApps().getFavoriteMap();
 
         let running = this._appSystem.get_running();
         const dockManager = Docking.DockManager.getDefault();

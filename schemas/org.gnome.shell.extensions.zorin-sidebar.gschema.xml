@@ -51,6 +51,12 @@
     <value value='9' nick='DOT'/>
   </enum>
   <schema path="/org/gnome/shell/extensions/zorin-sidebar/" id="org.gnome.shell.extensions.zorin-sidebar">
+    <key name="sidebar-apps" type="as">
+      <default>[]</default>
+      <summary>Apps pinned to the sidebar, in order</summary>
+      <description>Desktop file IDs of the apps pinned to the Zorin Sidebar. Independent of GNOME's favourites list.</description>
+    </key>
+
     <key name="dock-position" enum="org.gnome.shell.extensions.zorin-sidebar.position">
       <default>'RIGHT'</default>
       <summary>Dock position</summary>

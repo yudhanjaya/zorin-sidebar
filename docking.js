@@ -36,6 +36,7 @@ import {
     LauncherAPI,
     Locations,
     NotificationsMonitor,
+    SidebarApps,
     Theming,
     Utils,
 } from './imports.js';
@@ -1852,6 +1853,7 @@ export class DockManager {
         this._propertyInjections = new Utils.PropertyInjectionsHandler(this);
         this._settings = this._extension.getSettings(
             'org.gnome.shell.extensions.zorin-sidebar');
+        SidebarApps.initSidebarApps(this._settings);
         this._appSwitcherSettings = new Gio.Settings({schema_id: 'org.gnome.shell.app-switcher'});
         this._mapSettingsValues();
 
@@ -1914,8 +1916,6 @@ export class DockManager {
         this._signalsHandler.add(global.display, 'in-fullscreen-changed',
             () => this._updateUnredirect());
         this._createDocks();
-
-        this._overrideAppMenus();
 
         // status variable: true when the overview is shown through the dash
         // applications button.
@@ -2786,21 +2786,6 @@ export class DockManager {
 
         // Because we "disconnected" from the search controller, we have to manage its state.
         this.searchController._setSearchActive(false);
-    }
-
-    _overrideAppMenus() {
-        this._methodInjections.add(AppMenu.AppMenu.prototype,
-            '_updateFavoriteItem', function (originalFunction, ...args) {
-                /* eslint-disable no-invalid-this */
-                originalFunction.call(this, ...args);
-                if (!this._toggleFavoriteItem.visible)
-                    return;
-
-                const {id} = this._app;
-                this._toggleFavoriteItem.label.text = this._appFavorites.isFavorite(id)
-                    ? _('Remove from Sidebar') : __('Add to Sidebar');
-                /* eslint-enable no-invalid-this */
-            });
     }
 
     destroy() {

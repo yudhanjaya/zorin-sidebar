@@ -18,10 +18,16 @@ Changes from upstream:
 
 ## Using it
 
+Pinned apps live in the sidebar's own list (`sidebar-apps` in the
+`org.gnome.shell.extensions.zorin-sidebar` schema) — completely separate from
+GNOME's `favorite-apps`, so pinning here does not change your overview dash,
+and vice versa.
+
 1. Enable it, reload the shell (X11: `Alt+F2` → `r`)
-2. Click the **+** tile (or the dash context menu) to pin apps
-3. Drag apps from the app grid onto the bar to pin them
-4. Right-click an icon: New Window / Remove from Sidebar / Quit
+2. Pin apps by **dragging them from the app grid onto the bar**, or
+   right-click an icon in the bar → **Add to Sidebar**
+3. Drag icons to reorder; right-click an icon: New Window /
+   Remove from Sidebar / Quit
 
 ## License
 

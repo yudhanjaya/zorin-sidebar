@@ -13,7 +13,6 @@ import {
 
 import {
     AppDisplay,
-    AppFavorites,
     BoxPointer,
     Dash,
     Main,
@@ -30,12 +29,22 @@ import {
     DBusMenuUtils,
     Docking,
     Locations,
+    SidebarApps,
     Theming,
     Utils,
     WindowPreview,
 } from './imports.js';
 
 import {Extension} from './dependencies/shell/extensions/extension.js';
+
+// Checks whether the sidebar's own pinned-apps list is writable
+function appsWritable() {
+    try {
+        return Docking.DockManager.settings?.is_writable?.('sidebar-apps') ?? true;
+    } catch {
+        return true;
+    }
+}
 
 // Use __ () and N__() for the extension gettext domain, and reuse
 // the shell domain with the default _() and N_()
@@ -1196,77 +1205,40 @@ const DockAppIconMenu = class DockAppIconMenu extends PopupMenu.PopupMenu {
                 });
             }
 
-            const canFavorite = global.settings.is_writable('favorite-apps') &&
+            let appsWritable = true;
+            try {
+                appsWritable = Docking.DockManager.settings?.is_writable?.('sidebar-apps') ?? true;
+            } catch {
+                appsWritable = true;
+            }
+
+            const canFavorite = appsWritable &&
                 (this.sourceActor instanceof DockAppIcon) &&
                 ParentalControlsManager.getDefault().shouldShowApp(app.appInfo);
 
             if (canFavorite) {
                 this._appendSeparator();
 
-                const isFavorite = AppFavorites.getAppFavorites().isFavorite(app.get_id());
+                const isFavorite = SidebarApps.getSidebarApps().isFavorite(app.get_id());
                 if (isFavorite) {
                     const item = this._appendMenuItem(_('Remove from Sidebar'));
                     item.connect('activate', () => {
-                        const favs = AppFavorites.getAppFavorites();
-                        favs.removeFavorite(app.get_id());
+                        SidebarApps.getSidebarApps().removeFavorite(app.get_id());
                     });
                 } else {
                     const item = this._appendMenuItem(__('Add to Sidebar'));
                     item.connect('activate', () => {
-                        const favs = AppFavorites.getAppFavorites();
-                        favs.addFavorite(app.get_id());
+                        SidebarApps.getSidebarApps().addFavorite(app.get_id());
                     });
                 }
             }
 
-            if (Shell.AppSystem.get_default().lookup_app('org.gnome.Software.desktop') &&
-                this.sourceActor instanceof DockAppIcon &&
-                !this.sourceActor.getSnapName()) {
-                this._appendSeparator();
-                const item = this._appendMenuItem(_('App Details'));
-                item.connect('activate', () => {
-                    const id = app.get_id();
-                    const args = GLib.Variant.new('(ss)', [id, '']);
-                    Gio.DBus.get(Gio.BusType.SESSION, null,
-                        (o, res) => {
-                            const bus = Gio.DBus.get_finish(res);
-                            bus.call('org.gnome.Software',
-                                '/org/gnome/Software',
-                                'org.gtk.Actions', 'Activate',
-                                GLib.Variant.new('(sava{sv})',
-                                    ['details', [args], null]),
-                                null, 0, -1, null, null);
-                            Main.overview.hide();
-                        });
-                });
-            }
-
-            if (this.sourceActor instanceof DockAppIcon) {
-                const snapName = this.sourceActor.getSnapName();
-                const snapStore = snapName
-                    ? Shell.AppSystem.get_default().lookup_app(
-                        'snap-store_snap-store.desktop') : null;
-
-                if (snapStore) {
-                    this._appendSeparator();
-                    const item = this._appendMenuItem(_('App Details'));
-                    item.connect('activate', (_, event) => {
-                        snapStore.activate_full(-1, event.get_time());
-                        Util.spawnApp(
-                            [...snapStore.appInfo.get_commandline().split(' '), snapName]);
-                        Main.overview.hide();
-                    });
-                }
-            }
         }
 
         // dynamic menu
         const items = this._getMenuItems();
         let i = items.length;
-        if (Shell.AppSystem.get_default().lookup_app('org.gnome.Software.desktop'))
-            i -= 2;
-
-        if (global.settings.is_writable('favorite-apps'))
+        if (appsWritable())
             i -= 2;
 
         if (i < 0)
