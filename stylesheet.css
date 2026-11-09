@@ -1,0 +1,1543 @@
+.dash-item-container .overview-tile .app-grid-running-dot {
+  margin-bottom: 8px;
+  offset-y: 2px; }
+
+#zorin-sidebarContainer.bottom #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.bottom #dash .dash-background {
+    margin: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    border-radius: 24px;
+    spacing: 6px; }
+  #zorin-sidebarContainer.bottom #dash .dash-separator {
+    margin: 0 4px;
+    width: 1px;
+    height: 0;
+    margin-bottom: 4px; }
+  #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer {
+    padding: 10px;
+    padding-bottom: 0;
+    padding-top: 0; }
+    #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+  #zorin-sidebarContainer.bottom #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.bottom #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.bottom #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.bottom #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.bottom #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.bottom #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-bottom: 14px;
+      padding-top: 10px; }
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.bottom #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.bottom.fixed #dash .dash-background {
+  margin-top: 4px; }
+
+#zorin-sidebarContainer.bottom.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.bottom.fixed #dash .dash-item-container .show-apps {
+  padding-top: 14px; }
+
+.dash-label.bottom {
+  margin-bottom: 10px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.bottom.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.bottom.shrink #dash .dash-background {
+    margin: 0;
+    margin-bottom: 4px;
+    padding: 0;
+    border-radius: 18px;
+    spacing: 2px; }
+  #zorin-sidebarContainer.bottom.shrink #dash .dash-separator {
+    margin: 0 1px;
+    width: 1px;
+    height: 0;
+    margin-bottom: 4px; }
+  #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer {
+    padding: 3px;
+    padding-bottom: 0;
+    padding-top: 0; }
+    #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.bottom.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+  #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-bottom: 7px;
+      padding-top: 3px; }
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.bottom.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.bottom.shrink.fixed #dash .dash-background {
+  margin-top: 1px; }
+
+#zorin-sidebarContainer.bottom.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.bottom.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-top: 4px; }
+
+.dash-label.bottom.shrink {
+  margin-bottom: 3px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.bottom.extended #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.bottom.extended #dash .dash-background {
+    margin: 0;
+    margin-bottom: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 6px;
+    border: none; }
+  #zorin-sidebarContainer.bottom.extended #dash .dash-separator {
+    margin: 0 4px;
+    width: 1px;
+    height: 0;
+    margin-bottom: 0; }
+  #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-bottom: 0;
+    padding-top: 0; }
+    #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+    #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-left: 8px; }
+    #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-left: 8px; }
+    #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-right: 8px; }
+    #zorin-sidebarContainer.bottom.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-right: 8px; }
+  #zorin-sidebarContainer.bottom.extended #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.bottom.extended #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.bottom.extended #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-bottom: 10px;
+      padding-top: 10px; }
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.bottom.extended #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.bottom.extended.fixed #dash .dash-background {
+  margin-top: 0; }
+
+#zorin-sidebarContainer.bottom.extended.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.bottom.extended.fixed #dash .dash-item-container .show-apps {
+  padding-top: 10px; }
+
+.dash-label.bottom {
+  margin-bottom: 10px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.bottom.extended.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-background {
+    margin: 0;
+    margin-bottom: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 2px;
+    border: none; }
+  #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-separator {
+    margin: 0 1px;
+    width: 1px;
+    height: 0;
+    margin-bottom: 0; }
+  #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-bottom: 0;
+    padding-top: 0; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-left: 6px; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-left: 6px; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-right: 6px; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-right: 6px; }
+  #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-bottom: 3px;
+      padding-top: 3px; }
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.bottom.extended.shrink.fixed #dash .dash-background {
+  margin-top: 0; }
+
+#zorin-sidebarContainer.bottom.extended.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.bottom.extended.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-top: 3px; }
+
+.dash-label.bottom.shrink {
+  margin-bottom: 3px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+.zorin-sidebar-app-well-preview-menu-item.bottom {
+  padding: 0.5em 0.5em; }
+  .zorin-sidebar-app-well-preview-menu-item.bottom:ltr:first-child, .zorin-sidebar-app-well-preview-menu-item.bottom:rtl:last-child {
+    padding-left: 1em; }
+  .zorin-sidebar-app-well-preview-menu-item.bottom:ltr:last-child, .zorin-sidebar-app-well-preview-menu-item.bottom:rtl:first-child {
+    padding-right: 1em; }
+
+#zorin-sidebarContainer.top #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.top #dash .dash-background {
+    margin: 0;
+    margin-top: 4px;
+    padding: 0;
+    border-radius: 24px;
+    spacing: 6px; }
+  #zorin-sidebarContainer.top #dash .dash-separator {
+    margin: 0 4px;
+    width: 1px;
+    height: 0;
+    margin-top: 4px; }
+  #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer {
+    padding: 10px;
+    padding-top: 0;
+    padding-bottom: 0; }
+    #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+  #zorin-sidebarContainer.top #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.top #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.top #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.top #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.top #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.top #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.top #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-top: 14px;
+      padding-bottom: 10px; }
+      #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.top #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.top #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.top #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.top #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.top.fixed #dash .dash-background {
+  margin-bottom: 4px; }
+
+#zorin-sidebarContainer.top.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.top.fixed #dash .dash-item-container .show-apps {
+  padding-bottom: 14px; }
+
+.dash-label.top {
+  margin-top: 10px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.top.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.top.shrink #dash .dash-background {
+    margin: 0;
+    margin-top: 4px;
+    padding: 0;
+    border-radius: 18px;
+    spacing: 2px; }
+  #zorin-sidebarContainer.top.shrink #dash .dash-separator {
+    margin: 0 1px;
+    width: 1px;
+    height: 0;
+    margin-top: 4px; }
+  #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer {
+    padding: 3px;
+    padding-top: 0;
+    padding-bottom: 0; }
+    #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.top.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+  #zorin-sidebarContainer.top.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.top.shrink #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.top.shrink #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-top: 7px;
+      padding-bottom: 3px; }
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.top.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.top.shrink.fixed #dash .dash-background {
+  margin-bottom: 1px; }
+
+#zorin-sidebarContainer.top.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.top.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-bottom: 4px; }
+
+.dash-label.top.shrink {
+  margin-top: 3px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.top.extended #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.top.extended #dash .dash-background {
+    margin: 0;
+    margin-top: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 6px;
+    border: none; }
+  #zorin-sidebarContainer.top.extended #dash .dash-separator {
+    margin: 0 4px;
+    width: 1px;
+    height: 0;
+    margin-top: 0; }
+  #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0; }
+    #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+    #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-left: 8px; }
+    #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-left: 8px; }
+    #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-right: 8px; }
+    #zorin-sidebarContainer.top.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-right: 8px; }
+  #zorin-sidebarContainer.top.extended #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.top.extended #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.top.extended #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-top: 10px;
+      padding-bottom: 10px; }
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.top.extended #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.top.extended.fixed #dash .dash-background {
+  margin-bottom: 0; }
+
+#zorin-sidebarContainer.top.extended.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.top.extended.fixed #dash .dash-item-container .show-apps {
+  padding-bottom: 10px; }
+
+.dash-label.top {
+  margin-top: 10px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.top.extended.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.top.extended.shrink #dash .dash-background {
+    margin: 0;
+    margin-top: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 2px;
+    border: none; }
+  #zorin-sidebarContainer.top.extended.shrink #dash .dash-separator {
+    margin: 0 1px;
+    width: 1px;
+    height: 0;
+    margin-top: 0; }
+  #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0; }
+    #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 0 2px; }
+      #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:first-child, #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:last-child {
+        margin-left: 0; }
+      #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
+        margin-right: 0; }
+    #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-left: 6px; }
+    #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-left: 6px; }
+    #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-right: 6px; }
+    #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-right: 6px; }
+  #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 0 2px; }
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container:ltr:first-child, #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container:rtl:last-child {
+      margin-left: 0; }
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container:ltr:last-child, #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container:rtl:first-child {
+      margin-right: 0; }
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-top: 3px;
+      padding-bottom: 3px; }
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app:ltr:first-child, #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app:rtl:last-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .show-apps:ltr:first-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .show-apps:rtl:last-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile:ltr:first-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile:rtl:last-child {
+        padding-left: 0; }
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app:ltr:last-child, #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app:rtl:first-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .show-apps:ltr:last-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .show-apps:rtl:first-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile:ltr:last-child,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile:rtl:first-child {
+        padding-right: 0; }
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.top.extended.shrink.fixed #dash .dash-background {
+  margin-bottom: 0; }
+
+#zorin-sidebarContainer.top.extended.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.top.extended.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-bottom: 3px; }
+
+.dash-label.top.shrink {
+  margin-top: 3px;
+  -x-offset: 0;
+  -y-offset: 0; }
+
+.zorin-sidebar-app-well-preview-menu-item.top {
+  padding: 0.5em 0.5em; }
+  .zorin-sidebar-app-well-preview-menu-item.top:ltr:first-child, .zorin-sidebar-app-well-preview-menu-item.top:rtl:last-child {
+    padding-left: 1em; }
+  .zorin-sidebar-app-well-preview-menu-item.top:ltr:last-child, .zorin-sidebar-app-well-preview-menu-item.top:rtl:first-child {
+    padding-right: 1em; }
+
+#zorin-sidebarContainer.left #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.left #dash .dash-background {
+    margin: 0;
+    margin-left: 4px;
+    padding: 0;
+    border-radius: 24px;
+    spacing: 6px; }
+  #zorin-sidebarContainer.left #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 4px 0;
+    margin-left: 4px; }
+  #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer {
+    padding: 10px;
+    padding-left: 0;
+    padding-right: 0; }
+    #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+  #zorin-sidebarContainer.left #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.left #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.left #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.left #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.left #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-left: 14px;
+      padding-right: 10px; }
+      #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.left #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.left #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.left #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.left #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.left.fixed #dash .dash-background {
+  margin-right: 4px; }
+
+#zorin-sidebarContainer.left.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.left.fixed #dash .dash-item-container .show-apps {
+  padding-right: 14px; }
+
+.dash-label.left {
+  margin: 0;
+  -x-offset: 10px;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.left.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.left.shrink #dash .dash-background {
+    margin: 0;
+    margin-left: 4px;
+    padding: 0;
+    border-radius: 18px;
+    spacing: 2px; }
+  #zorin-sidebarContainer.left.shrink #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 1px 0;
+    margin-left: 4px; }
+  #zorin-sidebarContainer.left.shrink #dash #zorin-sidebarDashContainer {
+    padding: 3px;
+    padding-left: 0;
+    padding-right: 0; }
+    #zorin-sidebarContainer.left.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.left.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.left.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+  #zorin-sidebarContainer.left.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-left: 7px;
+      padding-right: 3px; }
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.left.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.left.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.left.shrink.fixed #dash .dash-background {
+  margin-right: 1px; }
+
+#zorin-sidebarContainer.left.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.left.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-right: 4px; }
+
+.dash-label.left.shrink {
+  margin: 0;
+  -x-offset: 3px;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.left.extended #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.left.extended #dash .dash-background {
+    margin: 0;
+    margin-left: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 6px;
+    border: none; }
+  #zorin-sidebarContainer.left.extended #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 4px 0;
+    margin-left: 0; }
+  #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-left: 0;
+    padding-right: 0; }
+    #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+    #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-top: 8px; }
+    #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-top: 8px; }
+    #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-bottom: 8px; }
+    #zorin-sidebarContainer.left.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-bottom: 8px; }
+  #zorin-sidebarContainer.left.extended #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-left: 10px;
+      padding-right: 10px; }
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.left.extended #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.left.extended.fixed #dash .dash-background {
+  margin-right: 0; }
+
+#zorin-sidebarContainer.left.extended.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.left.extended.fixed #dash .dash-item-container .show-apps {
+  padding-right: 10px; }
+
+.dash-label.left {
+  margin: 0;
+  -x-offset: 10px;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.left.extended.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.left.extended.shrink #dash .dash-background {
+    margin: 0;
+    margin-left: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 2px;
+    border: none; }
+  #zorin-sidebarContainer.left.extended.shrink #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 1px 0;
+    margin-left: 0; }
+  #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-left: 0;
+    padding-right: 0; }
+    #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+    #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-top: 6px; }
+    #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-top: 6px; }
+    #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-bottom: 6px; }
+    #zorin-sidebarContainer.left.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-bottom: 6px; }
+  #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-left: 3px;
+      padding-right: 3px; }
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.left.extended.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.left.extended.shrink.fixed #dash .dash-background {
+  margin-right: 0; }
+
+#zorin-sidebarContainer.left.extended.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.left.extended.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-right: 3px; }
+
+.dash-label.left.shrink {
+  margin: 0;
+  -x-offset: 3px;
+  -y-offset: 0; }
+
+.zorin-sidebar-app-well-preview-menu-item.left {
+  padding: 0.5em 0.5em; }
+  .zorin-sidebar-app-well-preview-menu-item.left:first-child {
+    padding-top: 1em; }
+  .zorin-sidebar-app-well-preview-menu-item.left:last-child {
+    padding-bottom: 1em; }
+
+#zorin-sidebarContainer.right #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.right #dash .dash-background {
+    margin: 0;
+    margin-right: 4px;
+    padding: 0;
+    border-radius: 24px;
+    spacing: 6px; }
+  #zorin-sidebarContainer.right #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 4px 0;
+    margin-right: 4px; }
+  #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer {
+    padding: 10px;
+    padding-right: 0;
+    padding-left: 0; }
+    #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+  #zorin-sidebarContainer.right #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.right #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.right #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.right #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.right #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-right: 14px;
+      padding-left: 10px; }
+      #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.right #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.right #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.right #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.right #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.right.fixed #dash .dash-background {
+  margin-left: 4px; }
+
+#zorin-sidebarContainer.right.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.right.fixed #dash .dash-item-container .show-apps {
+  padding-left: 14px; }
+
+.dash-label.right {
+  margin: 0;
+  -x-offset: 10px;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.right.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.right.shrink #dash .dash-background {
+    margin: 0;
+    margin-right: 4px;
+    padding: 0;
+    border-radius: 18px;
+    spacing: 2px; }
+  #zorin-sidebarContainer.right.shrink #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 1px 0;
+    margin-right: 4px; }
+  #zorin-sidebarContainer.right.shrink #dash #zorin-sidebarDashContainer {
+    padding: 3px;
+    padding-right: 0;
+    padding-left: 0; }
+    #zorin-sidebarContainer.right.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.right.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.right.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+  #zorin-sidebarContainer.right.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-right: 7px;
+      padding-left: 3px; }
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.right.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.right.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.right.shrink.fixed #dash .dash-background {
+  margin-left: 1px; }
+
+#zorin-sidebarContainer.right.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.right.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-left: 4px; }
+
+.dash-label.right.shrink {
+  margin: 0;
+  -x-offset: 3px;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.right.extended #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.right.extended #dash .dash-background {
+    margin: 0;
+    margin-right: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 6px;
+    border: none; }
+  #zorin-sidebarContainer.right.extended #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 4px 0;
+    margin-right: 0; }
+  #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-right: 0;
+    padding-left: 0; }
+    #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+    #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-top: 8px; }
+    #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-top: 8px; }
+    #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-bottom: 8px; }
+    #zorin-sidebarContainer.right.extended #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-bottom: 8px; }
+  #zorin-sidebarContainer.right.extended #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile {
+      padding: 2px 2px;
+      padding-right: 10px;
+      padding-left: 10px; }
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.right.extended #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.right.extended.fixed #dash .dash-background {
+  margin-left: 0; }
+
+#zorin-sidebarContainer.right.extended.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.right.extended.fixed #dash .dash-item-container .show-apps {
+  padding-left: 10px; }
+
+.dash-label.right {
+  margin: 0;
+  -x-offset: 10px;
+  -y-offset: 0; }
+
+#zorin-sidebarContainer.right.extended.shrink #dash {
+  margin: 0px;
+  padding: 0px; }
+  #zorin-sidebarContainer.right.extended.shrink #dash .dash-background {
+    margin: 0;
+    margin-right: 0;
+    padding: 0;
+    border-radius: 0;
+    spacing: 2px;
+    border: none; }
+  #zorin-sidebarContainer.right.extended.shrink #dash .dash-separator {
+    width: 0;
+    height: 1px;
+    margin: 1px 0;
+    margin-right: 0; }
+  #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer {
+    padding: 0;
+    padding-right: 0;
+    padding-left: 0; }
+    #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
+      margin: 2px 0; }
+      #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:first-child {
+        margin-top: 0; }
+      #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:last-child {
+        margin-bottom: 0; }
+    #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer > :first-child .show-apps {
+      padding-top: 6px; }
+    #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
+      padding-top: 6px; }
+    #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer > :last-child .show-apps {
+      padding-bottom: 6px; }
+    #zorin-sidebarContainer.right.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
+      padding-bottom: 6px; }
+  #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container {
+    /* Disable all margins defined upstream, we handle them here */
+    margin: 2px 0; }
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container > * {
+      margin: 0; }
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container:first-child {
+      margin-top: 0; }
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container:last-child {
+      margin-bottom: 0; }
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .app-well-app,
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .show-apps,
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .overview-tile {
+      padding: 1px 1px;
+      padding-right: 3px;
+      padding-left: 3px; }
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .app-well-app:first-child,
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .show-apps:first-child,
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .overview-tile:first-child {
+        padding-top: 0; }
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .app-well-app:last-child,
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .show-apps:last-child,
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .overview-tile:last-child {
+        padding-bottom: 0; }
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .app-well-app.updating,
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .show-apps.updating,
+      #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .overview-tile.updating {
+        opacity: 0.5; }
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .app-well-app.running .overview-icon,
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .overview-tile.running .overview-icon {
+      background-image: none; }
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .app-well-app .app-well-app-running-dot,
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .app-well-app .app-grid-running-dot,
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .overview-tile .app-well-app-running-dot,
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container .overview-tile .app-grid-running-dot {
+      margin-bottom: 2px; }
+    #zorin-sidebarContainer.right.extended.shrink #dash .dash-item-container > StButton {
+      transition-duration: 250;
+      background-size: contain; }
+
+#zorin-sidebarContainer.right.extended.shrink.fixed #dash .dash-background {
+  margin-left: 0; }
+
+#zorin-sidebarContainer.right.extended.shrink.fixed #dash .dash-item-container .app-well-app,
+#zorin-sidebarContainer.right.extended.shrink.fixed #dash .dash-item-container .show-apps {
+  padding-left: 3px; }
+
+.dash-label.right.shrink {
+  margin: 0;
+  -x-offset: 3px;
+  -y-offset: 0; }
+
+.zorin-sidebar-app-well-preview-menu-item.right {
+  padding: 0.5em 0.5em; }
+  .zorin-sidebar-app-well-preview-menu-item.right:first-child {
+    padding-top: 1em; }
+  .zorin-sidebar-app-well-preview-menu-item.right:last-child {
+    padding-bottom: 1em; }
+
+#zorin-sidebarContainer.top.shrink #dash .dash-background {
+  margin-top: 4px;
+  margin-bottom: 0; }
+
+#zorin-sidebarContainer.straight-corner #dash .dash-background,
+#zorin-sidebarContainer.shrink.straight-corner #dash .dash-background {
+  border-radius: 0px; }
+
+/* Scrollview style */
+.bottom #zorin-sidebarDashScrollview,
+.top #zorin-sidebarDashScrollview {
+  -st-hfade-offset: 24px; }
+
+.left #zorin-sidebarDashScrollview,
+.right #zorin-sidebarDashScrollview {
+  -st-vfade-offset: 24px; }
+
+/* Rounded floating theme */
+#zorin-sidebarContainer.zorin-sidebar #dash .dash-background,
+#zorin-sidebarContainer.zorin-sidebar.shrink #dash .dash-background {
+  border-radius: 999px; }
+
+#zorin-sidebarContainer.zorin-sidebar.left #dash {
+  margin: 0 0 0 8px; }
+
+#zorin-sidebarContainer.zorin-sidebar.right #dash {
+  margin: 0 8px 0 0; }
+
+#zorin-sidebarContainer.zorin-sidebar.top #dash {
+  margin: 8px 0 0 0; }
+
+#zorin-sidebarContainer.zorin-sidebar.bottom #dash {
+  margin: 0 0 8px 0; }
+
+#zorin-sidebarContainer.zorin-sidebar.extended #dash {
+  margin: 0 !important; }
+
+#zorin-sidebarContainer.zorin-sidebar.extended.left #dash {
+  border-left: 0; }
+
+#zorin-sidebarContainer.zorin-sidebar.extended.right #dash {
+  border-right: 0; }
+
+#zorin-sidebarContainer.zorin-sidebar.extended.top #dash {
+  border-top: 0; }
+
+#zorin-sidebarContainer.zorin-sidebar.extended.bottom #dash {
+  border-bottom: 0; }
+
+#zorin-sidebarContainer.zorin-sidebar .dash-item-container > .app-well-app .overview-icon,
+#zorin-sidebarContainer.zorin-sidebar .dash-item-container > .show-apps .overview-icon {
+  border-radius: 999px;
+  padding: 6px; }
+
+#zorin-sidebarContainer.zorin-sidebar .progress-bar,
+.overview-tile .progress-bar,
+.icon-grid .progress-bar {
+  /* Customization of the progress bar style. The possible elements
+     * are:
+     *
+     * -XXXXXX-YYYYYY: plain color
+     * -XXXXXX-YYYYYY-color-start: start color for gradient
+     * -XXXXXX-YYYYYY-color-end: end color for gradient
+     * -XXXXXX-YYYYYY-offset-start: offset for start color in gradient (0-1)
+     * -XXXXXX-YYYYYY-offset-end: offset for end color in gradient (0-1)
+     * -XXXXXX-line-width: width value for the line used for the border
+     *
+     * XXXXXX can be either
+     *
+     *    progress-bar-track: the "track" over which the progress bar is shown
+     *    progress-bar: the progress bar itself
+     *
+     * YYYYYY can be either
+     *
+     *    background: for the background color
+     *    border: for the border color
+     *
+     * plain color entries have priority over gradients, so if both are set for
+     * an element, the plain color will be used.
+     *
+     * Examples:
+     *
+     *  -progress-bar-track-background: rgba(128, 128, 0, 0.75);
+     *  -progress-bar-track-border: rgba(0, 0, 255, 0.25);
+     *
+     *  -progress-bar-background: rgba(0, 204, 204, 1);
+     *  -progress-bar-border: rgba(230, 230, 230, 1);
+     *
+     * Default values when these entries aren't set are equivalent to:
+     *   -progress-bar-track-background-color-start: 64, 64, 64, 1.0
+     *   -progress-bar-track-background-color-end: 89, 89, 89, 1.0
+     *   -progress-bar-track-background-start-offset: 0.4
+     *   -progress-bar-track-background-end-offset: 0.9
+     *   -progress-bar-track-border-color-start: 128, 128, 128, 0.1
+     *   -progress-bar-track-border-color-end: 89, 89, 89, 0.4
+     *   -progress-bar-track-border-start-offset: 0.5
+     *   -progress-bar-track-border-end-offset: 0.9
+     *   -progress-bar-track-line-width: 1
+     *   -progress-bar-background: 204, 204, 204, 1.0
+     *   -progress-bar-border: 230, 230, 230, 1.0
+     *   -progress-bar-height-factor: (0.20) 20% of the icon size
+     *   -progress-bar-line-width: 1
+     *   -progress-bar-top-offset: undefined
+     *   -progress-bar-valign: 1.0
+     *   -progress-bar-horizontal-padding: 0.05 (5% of icon size)
+     *   -progress-bar-vertical-padding: 0.05 (5% of icon size)
+     */
+  -progress-bar-track-background: rgba(0, 0, 0, 0.45);
+  -progress-bar-track-border: rgba(0, 0, 0, 0.7);
+  -progress-bar-background: white;
+  -progress-bar-border: white; }
+
+#overview .progress-bar,
+.apps-scroll-view .progress-bar {
+  -progress-bar-height-factor: 0.15;
+  -progress-bar-top-offset: 0;
+  -progress-bar-valign: 0.95; }
+
+#overview .grid-search-results .overview-tile .progress-bar,
+#overview .app-folder-dialog .progress-bar {
+  -progress-bar-height-factor: 0.13; }
+
+#zorin-sidebarContainer.top #dash .placeholder,
+#zorin-sidebarContainer.bottom #dash .placeholder {
+  width: 32px;
+  height: 1px; }
+
+/*
+ * This is applied to a dummy actor. Only the alpha value for the background and border color
+ * and the transition-duration are used
+ */
+#zorin-sidebarContainer.dummy-opaque {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-color: rgba(0, 0, 0, 0.4);
+  transition-duration: 300ms; }
+
+/*
+ * This is applied to a dummy actor. Only the alpha value for the background and border color
+ * and the transition-duration are used
+ */
+#zorin-sidebarContainer.dummy-transparent {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.1);
+  transition-duration: 500ms; }
+
+#zorin-sidebarContainer .number-overlay,
+.overview-tile .number-overlay,
+.icon-grid .number-overlay {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center; }
+
+#zorin-sidebarContainer .notification-badge,
+.overview-tile .notification-badge,
+.icon-grid .notification-badge {
+  color: white;
+  background-color: red;
+  padding: 0.2em 0.5em;
+  border-radius: 1em;
+  font-weight: bold;
+  text-align: center;
+  margin: 2px; }
+
+#zorin-sidebarPreviewSeparator.popup-separator-menu-item-horizontal {
+  width: 1px;
+  height: auto;
+  border-right-width: 1px;
+  margin: 32px 0px; }
+
+#zorin-sidebarContainer .metro .overview-icon {
+  border-radius: 0px; }
+
+#zorin-sidebarContainer.bottom .metro.running2.focused,
+#zorin-sidebarContainer.top .metro.running2.focused {
+  background-image: url("./media/highlight_stacked_bg.svg");
+  background-position: 0px 0px;
+  background-size: contain; }
+
+#zorin-sidebarContainer.left .metro.running2.focused,
+#zorin-sidebarContainer.right .metro.running2.focused {
+  background-image: url("./media/highlight_stacked_bg_h.svg");
+  background-position: 0px 0px;
+  background-size: contain; }
+
+#zorin-sidebarContainer.bottom .metro.running3.focused,
+#zorin-sidebarContainer.top .metro.running3.focused {
+  background-image: url("./media/highlight_stacked_bg.svg");
+  background-position: 0px 0px;
+  background-size: contain; }
+
+#zorin-sidebarContainer.left .metro.running3.focused,
+#zorin-sidebarContainer.right .metro.running3.focused {
+  background-image: url("./media/highlight_stacked_bg_h.svg");
+  background-position: 0px 0px;
+  background-size: contain; }
+
+#zorin-sidebarContainer.bottom .metro.running4.focused,
+#zorin-sidebarContainer.top .metro.running4.focused {
+  background-image: url("./media/highlight_stacked_bg.svg");
+  background-position: 0px 0px;
+  background-size: contain; }
+
+#zorin-sidebarContainer.left .metro.running4.focused,
+#zorin-sidebarContainer.right .metro.running4.focused {
+  background-image: url("./media/highlight_stacked_bg_h.svg");
+  background-position: 0px 0px;
+  background-size: contain; }
