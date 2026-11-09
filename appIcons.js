@@ -1680,17 +1680,48 @@ const SidebarAddAppsMenu = class SidebarAddAppsMenu extends PopupMenu.PopupMenu 
         });
         header.add_style_class_name('zorin-sidebar-menu-header');
 
+        // Search field at the top: filters the list live as you type
+        const searchSection = new PopupMenu.PopupMenuSection();
+        this._searchEntry = new St.Entry({
+            style_class: 'search-entry',
+            hint_text: __('Search applications…'),
+            x_expand: true,
+            can_focus: true,
+            track_hover: true,
+        });
+        this._searchEntry.clutter_text.connect('text-changed', () => this._filter());
+        searchSection.actor.add_child(this._searchEntry);
+
         Main.uiGroup.add_child(this.actor);
 
         this._appsSection = new SidebarAddAppsMenuScrollSection();
         this.addMenuItem(header);
+        this.addMenuItem(searchSection);
         this.addMenuItem(this._appsSection);
 
         this._rebuild();
+        this._filter = this._filter.bind(this);
         this.connect('open-state-changed', (_menu, isOpen) => {
-            if (isOpen)
-                this._rebuild();
+            if (isOpen) {
+                this._filter();
+                this._searchEntry.grab_key_focus();
+            }
         });
+    }
+
+    _filter() {
+        const query = (this._searchEntry?.text ?? '').trim().toLowerCase();
+        let matched = 0;
+        for (const item of this._appsSection.box.get_children()) {
+            const text = item.actor?._searchText ?? '';
+            const visible = !query || text.includes(query);
+            item.actor.visible = visible;
+            if (visible)
+                matched++;
+        }
+
+        this._searchEntry.set_hint_text(
+            matched === 0 && query ? _('No applications found') : __('Search applications…'));
     }
 
     _rebuild() {
@@ -1730,6 +1761,7 @@ const SidebarAddAppsMenu = class SidebarAddAppsMenu extends PopupMenu.PopupMenu 
                 appInfo.get_display_name() ?? id,
                 appInfo.get_icon(),
             );
+            item.actor._searchText = (item.actor.label?.text ?? '').toLowerCase();
             item.setOrnament(ornament(id));
             item.connect('activate', () => {
                 const apps = SidebarApps.getSidebarApps();

@@ -1587,3 +1587,9 @@
 }
 
 /* Center each icon horizontally in the tile */
+
+/* Picker search field fills the menu, not 24em */
+.zorin-sidebar-add-menu .search-entry {
+  width: auto;
+  margin: 4px 8px;
+}
