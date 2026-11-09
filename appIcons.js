@@ -1785,6 +1785,11 @@ export const SidebarAddAppsIcon = GObject.registerClass(
     _init(position) {
         super._init(position);
 
+        // We don't need a "checked" state on the button; the popover IS the state.
+        // This prevents the theme's blue checked background.
+        this.toggleButton.toggleMode = false;
+        this.toggleButton.set_hover(false);
+
         // Fill the bar width so hover is a full-width band, not a floating square
         this.xExpand = true;
         this.xAlign = Clutter.ActorAlign.FILL;
