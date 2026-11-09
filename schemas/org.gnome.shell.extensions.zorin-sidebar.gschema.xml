@@ -173,7 +173,7 @@
       <description>Add the possibility to switch workspace by mouse scrolling over the dock.</description>
     </key>
     <key type="i" name="dash-max-icon-size">
-      <default>32</default>
+      <default>24</default>
       <summary>Maximum dash icon size</summary>
       <description>Set the allowed maximum dash icon size. Allowed range: 16..64.</description>
     </key>

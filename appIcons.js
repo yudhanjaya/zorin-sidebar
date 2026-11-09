@@ -1766,7 +1766,7 @@ export const SidebarAddAppsIcon = GObject.registerClass(
         this._iconActor = new St.Icon({
             icon_name: 'list-add-symbolic',
             icon_size: size,
-            style_class: 'show-apps-icon',
+            style_class: 'show-apps-icon sidebar-add-apps-icon',
             track_hover: true,
         });
         return this._iconActor;

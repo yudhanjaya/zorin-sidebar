@@ -1553,3 +1553,10 @@
   background-image: url("./media/highlight_stacked_bg_h.svg");
   background-position: 0px 0px;
   background-size: contain; }
+
+#zorin-sidebarContainer.right .sidebar-add-apps-icon,
+#zorin-sidebarContainer.left .sidebar-add-apps-icon,
+#zorin-sidebarContainer.top .sidebar-add-apps-icon,
+#zorin-sidebarContainer.bottom .sidebar-add-apps-icon {
+  padding: 4px 8px;
+}
