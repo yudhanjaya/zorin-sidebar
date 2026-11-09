@@ -1554,11 +1554,9 @@
   background-position: 0px 0px;
   background-size: contain; }
 
-#zorin-sidebarContainer.right .sidebar-add-apps-icon,
-#zorin-sidebarContainer.left .sidebar-add-apps-icon,
-#zorin-sidebarContainer.top .sidebar-add-apps-icon,
-#zorin-sidebarContainer.bottom .sidebar-add-apps-icon {
-  padding: 4px 8px;
+.sidebar-add-apps-icon {
+  background: transparent;
+  padding: 0;
 }
 
 #zorin-sidebarContainer .app-well-app,

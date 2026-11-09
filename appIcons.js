@@ -1763,13 +1763,39 @@ export const SidebarAddAppsIcon = GObject.registerClass(
     }
 
     _createIcon(size) {
-        this._iconActor = new St.Icon({
-            icon_name: 'list-add-symbolic',
-            icon_size: size,
-            style_class: 'overview-icon',
-            track_hover: true,
+        // The app tiles fill ~90% of their canvas; drawing our own plus to
+        // match their visual weight gives us a tile that doesn't look small
+        // next to the app icons.
+        const plus = new St.DrawingArea({ style_class: 'sidebar-add-apps-icon' });
+        plus.set_size(size, size);
+        plus.connect('repaint', area => {
+            const cr = area.get_context();
+            if (!cr)
+                return;
+
+            const [width, height] = area.get_surface_size();
+            const s = Math.min(width, height);
+            const arm = s * 0.28;
+            const cx = s / 2;
+            const lineWidth = Math.max(2.5, s / 11);
+
+            const node = area.get_theme_node();
+            const fg = node.get_foreground_color();
+            cr.setSourceRGBA(fg.red / 255, fg.green / 255, fg.blue / 255, fg.alpha / 255);
+
+            cr.setLineWidth(lineWidth);
+            cr.setLineCap(1); // round
+            cr.moveTo(cx - arm, cx);
+            cr.lineTo(cx + arm, cx);
+            cr.moveTo(cx, cx - arm);
+            cr.lineTo(cx, cx + arm);
+            cr.stroke();
+
+            cr.$dispose();
         });
-        return this._iconActor;
+
+        this._iconActor = plus;
+        return plus;
     }
 
 
