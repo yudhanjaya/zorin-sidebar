@@ -45,6 +45,7 @@ export const PositionStyleClass = Object.freeze([
  */
 export class ThemeManager extends EventEmitter {
     constructor(dock) {
+        super();
         this._signalsHandler = new Utils.GlobalSignalsHandler(this);
         this._bindSettingsChanges();
         this._actor = dock;
@@ -352,6 +353,7 @@ export class ThemeManager extends EventEmitter {
  */
 class Transparency extends EventEmitter {
     constructor(dock) {
+        super();
         this._dash = dock.dash;
         this._actor = this._dash._container;
         this._backgroundActor = this._dash._background;
