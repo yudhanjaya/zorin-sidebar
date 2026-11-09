@@ -53,7 +53,7 @@ and here.
 
 ## Trademark note
 
-We have no claim to the Zorin name, nor do we assert as such. Zorin OS and
+I have no claim to the Zorin name, nor do I assert as such. Zorin OS and
 the Zorin name are the property of their respective owners. This project is
 an independent fork and is not affiliated with, endorsed by or produced by
 Zorin OS or its developers.
