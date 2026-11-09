@@ -1,7 +1,6 @@
 # Zorin Sidebar
 
-A sidebar of just the apps you pin, in the visual style of the Zorin Dash.
-Pinned apps only: no launchers, trash, mounts or window lists.
+A sidebar of just the apps you pin. Uses the visual style of the Zorin Dash.
 
 ## Why
 
