@@ -9,7 +9,7 @@
     margin: 0;
     margin-bottom: 4px;
     padding: 0;
-    border-radius: 24px;
+    border-radius: 8px;
     spacing: 6px; }
   #zorin-sidebarContainer.bottom #dash .dash-separator {
     margin: 0 4px;
@@ -17,7 +17,7 @@
     height: 0;
     margin-bottom: 4px; }
   #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer {
-    padding: 4px 2px;
+    padding: 4px 3px;
     padding-bottom: 0;
     padding-top: 0; }
     #zorin-sidebarContainer.bottom #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -88,7 +88,7 @@
     margin: 0;
     margin-bottom: 4px;
     padding: 0;
-    border-radius: 18px;
+    border-radius: 5px;
     spacing: 2px; }
   #zorin-sidebarContainer.bottom.shrink #dash .dash-separator {
     margin: 0 1px;
@@ -274,13 +274,13 @@
       #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
         margin-right: 0; }
     #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > :first-child .show-apps {
-      padding-left: 6px; }
+      padding-left: 2px; }
     #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
-      padding-left: 6px; }
+      padding-left: 2px; }
     #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer > :last-child .show-apps {
-      padding-right: 6px; }
+      padding-right: 2px; }
     #zorin-sidebarContainer.bottom.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
-      padding-right: 6px; }
+      padding-right: 2px; }
   #zorin-sidebarContainer.bottom.extended.shrink #dash .dash-item-container {
     /* Disable all margins defined upstream, we handle them here */
     margin: 0 2px; }
@@ -350,7 +350,7 @@
     margin: 0;
     margin-top: 4px;
     padding: 0;
-    border-radius: 24px;
+    border-radius: 8px;
     spacing: 6px; }
   #zorin-sidebarContainer.top #dash .dash-separator {
     margin: 0 4px;
@@ -358,7 +358,7 @@
     height: 0;
     margin-top: 4px; }
   #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer {
-    padding: 4px 2px;
+    padding: 4px 3px;
     padding-top: 0;
     padding-bottom: 0; }
     #zorin-sidebarContainer.top #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -429,7 +429,7 @@
     margin: 0;
     margin-top: 4px;
     padding: 0;
-    border-radius: 18px;
+    border-radius: 5px;
     spacing: 2px; }
   #zorin-sidebarContainer.top.shrink #dash .dash-separator {
     margin: 0 1px;
@@ -615,13 +615,13 @@
       #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:ltr:last-child, #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview:rtl:first-child {
         margin-right: 0; }
     #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > :first-child .show-apps {
-      padding-left: 6px; }
+      padding-left: 2px; }
     #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:first-child {
-      padding-left: 6px; }
+      padding-left: 2px; }
     #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer > :last-child .show-apps {
-      padding-right: 6px; }
+      padding-right: 2px; }
     #zorin-sidebarContainer.top.extended.shrink #dash #zorin-sidebarDashContainer #zorin-sidebarDashScrollview:last-child {
-      padding-right: 6px; }
+      padding-right: 2px; }
   #zorin-sidebarContainer.top.extended.shrink #dash .dash-item-container {
     /* Disable all margins defined upstream, we handle them here */
     margin: 0 2px; }
@@ -691,7 +691,7 @@
     margin: 0;
     margin-left: 4px;
     padding: 0;
-    border-radius: 24px;
+    border-radius: 8px;
     spacing: 6px; }
   #zorin-sidebarContainer.left #dash .dash-separator {
     width: 0;
@@ -699,7 +699,7 @@
     margin: 4px 0;
     margin-left: 4px; }
   #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer {
-    padding: 4px 2px;
+    padding: 4px 3px;
     padding-left: 0;
     padding-right: 0; }
     #zorin-sidebarContainer.left #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -721,8 +721,8 @@
     #zorin-sidebarContainer.left #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-left: 6px;
-      padding-right: 6px; }
+      padding-left: 2px;
+      padding-right: 2px; }
       #zorin-sidebarContainer.left #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.left #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.left #dash .dash-item-container .overview-tile:first-child {
@@ -752,7 +752,7 @@
 
 #zorin-sidebarContainer.left.fixed #dash .dash-item-container .app-well-app,
 #zorin-sidebarContainer.left.fixed #dash .dash-item-container .show-apps {
-  padding-right: 6px; }
+  padding-right: 2px; }
 
 .dash-label.left {
   margin: 0;
@@ -766,7 +766,7 @@
     margin: 0;
     margin-left: 4px;
     padding: 0;
-    border-radius: 18px;
+    border-radius: 5px;
     spacing: 2px; }
   #zorin-sidebarContainer.left.shrink #dash .dash-separator {
     width: 0;
@@ -880,8 +880,8 @@
     #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-left: 6px;
-      padding-right: 6px; }
+      padding-left: 2px;
+      padding-right: 2px; }
       #zorin-sidebarContainer.left.extended #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.left.extended #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.left.extended #dash .dash-item-container .overview-tile:first-child {
@@ -911,7 +911,7 @@
 
 #zorin-sidebarContainer.left.extended.fixed #dash .dash-item-container .app-well-app,
 #zorin-sidebarContainer.left.extended.fixed #dash .dash-item-container .show-apps {
-  padding-right: 6px; }
+  padding-right: 2px; }
 
 .dash-label.left {
   margin: 0;
@@ -1016,7 +1016,7 @@
     margin: 0;
     margin-right: 4px;
     padding: 0;
-    border-radius: 24px;
+    border-radius: 8px;
     spacing: 6px; }
   #zorin-sidebarContainer.right #dash .dash-separator {
     width: 0;
@@ -1024,7 +1024,7 @@
     margin: 4px 0;
     margin-right: 4px; }
   #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer {
-    padding: 4px 2px;
+    padding: 4px 3px;
     padding-right: 0;
     padding-left: 0; }
     #zorin-sidebarContainer.right #dash #zorin-sidebarDashContainer > #zorin-sidebarDashScrollview {
@@ -1046,8 +1046,8 @@
     #zorin-sidebarContainer.right #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-right: 6px;
-      padding-left: 6px; }
+      padding-right: 2px;
+      padding-left: 2px; }
       #zorin-sidebarContainer.right #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.right #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.right #dash .dash-item-container .overview-tile:first-child {
@@ -1077,7 +1077,7 @@
 
 #zorin-sidebarContainer.right.fixed #dash .dash-item-container .app-well-app,
 #zorin-sidebarContainer.right.fixed #dash .dash-item-container .show-apps {
-  padding-left: 6px; }
+  padding-left: 2px; }
 
 .dash-label.right {
   margin: 0;
@@ -1091,7 +1091,7 @@
     margin: 0;
     margin-right: 4px;
     padding: 0;
-    border-radius: 18px;
+    border-radius: 5px;
     spacing: 2px; }
   #zorin-sidebarContainer.right.shrink #dash .dash-separator {
     width: 0;
@@ -1205,8 +1205,8 @@
     #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps,
     #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile {
       padding: 2px 2px;
-      padding-right: 6px;
-      padding-left: 6px; }
+      padding-right: 2px;
+      padding-left: 2px; }
       #zorin-sidebarContainer.right.extended #dash .dash-item-container .app-well-app:first-child,
       #zorin-sidebarContainer.right.extended #dash .dash-item-container .show-apps:first-child,
       #zorin-sidebarContainer.right.extended #dash .dash-item-container .overview-tile:first-child {
@@ -1236,7 +1236,7 @@
 
 #zorin-sidebarContainer.right.extended.fixed #dash .dash-item-container .app-well-app,
 #zorin-sidebarContainer.right.extended.fixed #dash .dash-item-container .show-apps {
-  padding-left: 6px; }
+  padding-left: 2px; }
 
 .dash-label.right {
   margin: 0;
@@ -1559,4 +1559,10 @@
 #zorin-sidebarContainer.top .sidebar-add-apps-icon,
 #zorin-sidebarContainer.bottom .sidebar-add-apps-icon {
   padding: 4px 8px;
+}
+
+#zorin-sidebarContainer .app-well-app,
+#zorin-sidebarContainer .show-apps,
+#zorin-sidebarContainer .overview-tile {
+  border-radius: 5px;
 }
