@@ -2798,7 +2798,7 @@ export class DockManager {
 
                 const {id} = this._app;
                 this._toggleFavoriteItem.label.text = this._appFavorites.isFavorite(id)
-                    ? _('Unpin') : __('Pin to Dock');
+                    ? _('Remove from Sidebar') : __('Add to Sidebar');
                 /* eslint-enable no-invalid-this */
             });
     }

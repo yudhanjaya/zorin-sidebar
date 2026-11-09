@@ -277,7 +277,7 @@
       <description>Consider volume, devices and trash as different application windows and not part of the file manager</description>
     </key>
     <key type="b" name="dance-urgent-applications">
-      <default>true</default>
+      <default>false</default>
       <summary>Wiggle urgent applications</summary>
       <description>Wiggle urgent application icons in the dash</description>
     </key>
@@ -621,12 +621,12 @@
       <description>Hide tooltip when hovering application in the dash.</description>
     </key>
     <key name="show-icons-emblems" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>Show application icons emblems</summary>
       <description>Show application icons emblems such as notification counters an progress bars.</description>
     </key>
     <key name="show-icons-notifications-counter" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>Show the number of unread notifications in icons</summary>
       <description>Show application icons emblems such as notification</description>
     </key>

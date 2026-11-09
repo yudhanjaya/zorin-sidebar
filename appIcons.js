@@ -1205,13 +1205,13 @@ const DockAppIconMenu = class DockAppIconMenu extends PopupMenu.PopupMenu {
 
                 const isFavorite = AppFavorites.getAppFavorites().isFavorite(app.get_id());
                 if (isFavorite) {
-                    const item = this._appendMenuItem(_('Unpin'));
+                    const item = this._appendMenuItem(_('Remove from Sidebar'));
                     item.connect('activate', () => {
                         const favs = AppFavorites.getAppFavorites();
                         favs.removeFavorite(app.get_id());
                     });
                 } else {
-                    const item = this._appendMenuItem(__('Pin to Dock'));
+                    const item = this._appendMenuItem(__('Add to Sidebar'));
                     item.connect('activate', () => {
                         const favs = AppFavorites.getAppFavorites();
                         favs.addFavorite(app.get_id());
