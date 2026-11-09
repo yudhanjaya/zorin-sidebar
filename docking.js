@@ -27,15 +27,7 @@ import {
 } from './dependencies/shell/misc.js';
 
 import {
-    AppIconsDecorator,
-    AppSpread,
     DockDash,
-    DesktopIconsIntegration,
-    FileManager1API,
-    Intellihide,
-    LauncherAPI,
-    Locations,
-    NotificationsMonitor,
     SidebarApps,
     Theming,
     Utils,
@@ -45,11 +37,11 @@ import {Extension} from './dependencies/shell/extensions/extension.js';
 
 import {StrutsManager} from './dockStruts.js';
 
+import { EventEmitter } from 'resource:///org/gnome/shell/misc/signals.js';
+
 // Use __ () and N__() for the extension gettext domain, and reuse
 // the shell domain with the default _() and N_()
 const {gettext: __} = Extension;
-
-const {signals: Signals} = imports;
 
 const DOCK_DWELL_CHECK_INTERVAL = 100;
 const ICON_ANIMATOR_DURATION = 3000;
@@ -71,7 +63,6 @@ const scrollAction = Object.freeze({
 const Labels = Object.freeze({
     INITIALIZE: Symbol('initialize'),
     ISOLATION: Symbol('isolation'),
-    LOCATIONS: Symbol('locations'),
     MAIN_DASH: Symbol('main-dash'),
     OLD_DASH_CHANGES: Symbol('old-dash-changes'),
     SETTINGS: Symbol('settings'),
@@ -238,10 +229,6 @@ const DockedDash = GObject.registerClass({
             'dock-state', 'dock-state', 'dock-state',
             GObject.ParamFlags.READWRITE,
             0, GLib.MAXUINT32, State.HIDDEN),
-        'intellihide-enabled': GObject.ParamSpec.boolean(
-            'intellihide-enabled', 'intellihide-enabled', 'intellihide-enabled',
-            GObject.ParamFlags.READWRITE,
-            false),
         'autohide-enabled': GObject.ParamSpec.boolean(
             'autohide-enabled', 'autohide-enabled', 'autohide-enabled',
             GObject.ParamFlags.READWRITE,
@@ -272,14 +259,11 @@ const DockedDash = GObject.registerClass({
         // Temporary ignore hover events linked to autohide for whatever reason
         this._ignoreHover = false;
 
-        // Create intellihide object to monitor windows overlapping
-        this._intellihide = new Intellihide.Intellihide(this.monitorIndex);
 
         // Put dock on the required monitor
         this._monitor = Main.layoutManager.monitors[this.monitorIndex];
 
-        // this store size and the position where the dash is shown;
-        // used by intellihide module to check window overlap.
+        // Size and position where the bar is shown; used for struts
         this._staticBox = new Clutter.ActorBox();
         this._staticBoxGeometry = null;
 
@@ -326,11 +310,6 @@ const DockedDash = GObject.registerClass({
         // Connect global signals
         this._signalsHandler = new Utils.GlobalSignalsHandler(this);
         this._signalsHandler.add([
-            // Monitor windows overlapping
-            this._intellihide,
-            'status-changed',
-            () => this.updateDashVisibility(),
-        ], [
             this.dash,
             'menu-opened',
             () => {
@@ -392,12 +371,6 @@ const DockedDash = GObject.registerClass({
                 this.remove_style_class_name('autohide');
         });
 
-        this.connect('notify::intellihide-enabled', () => {
-            if (this.intellihideEnabled)
-                this._intellihide.enable();
-            else
-                this._intellihide.disable();
-        });
 
         // Since the actor is not a topLevel child and its parent is now not added to the Chrome,
         // the allocation change of the parent container (slide in and slideout) doesn't trigger
@@ -512,9 +485,8 @@ const DockedDash = GObject.registerClass({
     }
 
     _onDestroy() {
-        // The dash, intellihide and themeManager have global signals as well internally
+        // The dash and themeManager have global signals as well internally
         this.dash.destroy();
-        this._intellihide.destroy();
         this._themeManager.destroy();
         this._workspaceSwitcherPopup?.destroy();
         delete this._staticBox;
@@ -620,30 +592,6 @@ const DockedDash = GObject.registerClass({
             },
         ], [
             settings,
-            'changed::show-trash',
-            () => {
-                this.dash.resetAppIcons();
-            },
-            Utils.SignalsHandlerFlags.CONNECT_AFTER,
-        ], [
-            settings,
-            'changed::show-mounts',
-            () => {
-                this.dash.resetAppIcons();
-            },
-            Utils.SignalsHandlerFlags.CONNECT_AFTER,
-        ], [
-            settings,
-            'changed::isolate-locations',
-            () => this.dash.resetAppIcons(),
-            Utils.SignalsHandlerFlags.CONNECT_AFTER,
-        ], [
-            settings,
-            'changed::dance-urgent-applications',
-            () => this.dash.resetAppIcons(),
-            Utils.SignalsHandlerFlags.CONNECT_AFTER,
-        ], [
-            settings,
             'changed::show-running',
             () => {
                 this.dash.resetAppIcons();
@@ -685,19 +633,6 @@ const DockedDash = GObject.registerClass({
             'changed::manualhide',
             () => {
                 this._updateVisibilityMode();
-            },
-        ], [
-            settings,
-            'changed::intellihide',
-            () => {
-                this._updateVisibilityMode();
-                this._updateVisibleDesktop();
-            },
-        ], [
-            settings,
-            'changed::intellihide-mode',
-            () => {
-                this._intellihide.forceUpdate();
             },
         ], [
             settings,
@@ -768,10 +703,8 @@ const DockedDash = GObject.registerClass({
         const {settings} = DockManager;
         if (DockManager.settings.dockFixed || DockManager.settings.manualhide) {
             this.autohideEnabled = false;
-            this.intellihideEnabled = false;
         } else {
             this.autohideEnabled = settings.autohide;
-            this.intellihideEnabled = settings.intellihide;
         }
 
         this.updateDashVisibility();
@@ -781,7 +714,6 @@ const DockedDash = GObject.registerClass({
      * Show/hide dash based on, in order of priority:
      * overview visibility
      * fixed mode
-     * intellihide
      * autohide
      * overview visibility
      */
@@ -804,17 +736,6 @@ const DockedDash = GObject.registerClass({
         if (DockManager.settings.dockFixed) {
             this._removeAnimations();
             this._animateIn(settings.animationTime, 0);
-        } else if (this.intellihideEnabled) {
-            if (!this.dash.requiresVisibility && this._intellihide.getOverlapStatus()) {
-                this._ignoreHover = false;
-                // Do not hide if autohide is enabled and mouse is hover
-                if (!this._box.hover || !this.autohideEnabled)
-                    this._animateOut(settings.animationTime, 0);
-            } else {
-                this._ignoreHover = true;
-                this._removeAnimations();
-                this._animateIn(settings.animationTime, 0);
-            }
         } else if (this.autohideEnabled) {
             this._ignoreHover = false;
 
@@ -831,13 +752,11 @@ const DockedDash = GObject.registerClass({
         this.add_style_class_name('overview');
 
         this._ignoreHover = true;
-        this._intellihide.disable();
         this._removeAnimations();
         this._animateIn(DockManager.settings.animationTime, 0);
     }
 
     _onOverviewHiding() {
-        this._intellihide.enable();
         this.updateDashVisibility();
     }
 
@@ -860,8 +779,7 @@ const DockedDash = GObject.registerClass({
 
     _hoverChanged() {
         if (!this._ignoreHover) {
-            // Skip if dock is not in autohide mode for instance because it is shown
-            // by intellihide.
+            // Skip if dock is not in autohide mode because it is shown
             if (this.autohideEnabled) {
                 if (this._box.hover || Main.overview.visible)
                     this.showDock();
@@ -1344,21 +1262,6 @@ const DockedDash = GObject.registerClass({
         }
     }
 
-    _updateVisibleDesktop() {
-        if (!this.intellihideEnabled)
-            return;
-
-        const {desktopIconsUsableArea} = DockManager.getDefault();
-        if (this._position === St.Side.BOTTOM)
-            desktopIconsUsableArea.setMargins(this.monitorIndex, 0, this._box.height, 0, 0);
-        else if (this._position === St.Side.TOP)
-            desktopIconsUsableArea.setMargins(this.monitorIndex, this._box.height, 0, 0, 0);
-        else if (this._position === St.Side.RIGHT)
-            desktopIconsUsableArea.setMargins(this.monitorIndex, 0, 0, 0, this._box.width);
-        else if (this._position === St.Side.LEFT)
-            desktopIconsUsableArea.setMargins(this.monitorIndex, 0, 0, this._box.width, 0);
-    }
-
     _updateStaticBox() {
         const x = this.x + this._slider.x -
             (this._position === St.Side.RIGHT ? this._box.width : 0);
@@ -1374,8 +1277,6 @@ const DockedDash = GObject.registerClass({
         this._staticBoxGeometry = {x, y, width, height};
         this._staticBox.init_rect(x, y, width, height);
 
-        this._intellihide.updateTargetBox(this._staticBox);
-        this._updateVisibleDesktop();
         this._updateStruts();
     }
 
@@ -1833,7 +1734,7 @@ const WorkspaceIsolation = class ZorinSidebarWorkspaceIsolation {
 };
 
 
-export class DockManager {
+export class DockManager extends EventEmitter {
     constructor(extension) {
         if (DockManager._singleton) {
             logError(new Error('ZorinSidebar has been already initialized'),
@@ -1860,35 +1761,8 @@ export class DockManager {
         this._iconTheme = new St.IconTheme();
 
         this._strutsManager = new StrutsManager();
-        this._desktopIconsUsableArea = new DesktopIconsIntegration.DesktopIconsUsableAreaClass(extension);
-        this._oldDash = Main.overview.isDummy ? null : Main.overview.dash;
-        this._signalsHandler.add(this._oldDash, 'destroy', () => (this._oldDash = null));
         this._discreteGpuAvailable = AppDisplay.discreteGpuAvailable;
-        this._appSpread = new AppSpread.AppSpread();
-        this._notificationsMonitor = new NotificationsMonitor.NotificationsMonitor();
         this._windowTracker = Shell.WindowTracker.get_default();
-
-        const needsRemoteModel = () =>
-            !this._notificationsMonitor.dndMode && this._settings.showIconsEmblems;
-
-        const ensureRemoteModel = () => {
-            const shouldHaveRemoteModel = needsRemoteModel();
-            if (shouldHaveRemoteModel && !this._remoteModel) {
-                this._remoteModel = new LauncherAPI.LauncherEntryRemoteModel();
-                this._appIconsDecorator = new AppIconsDecorator.AppIconsDecorator();
-            } else if (!shouldHaveRemoteModel) {
-                this._remoteModel?.destroy();
-                delete this._remoteModel;
-                this._appIconsDecorator?.destroy();
-                delete this._appIconsDecorator;
-            }
-        };
-        ensureRemoteModel();
-
-        this._signalsHandler.add(this._notificationsMonitor, 'state-changed',
-            () => ensureRemoteModel());
-        this._signalsHandler.add(this._settings, 'changed::show-icons-emblems',
-            () => ensureRemoteModel());
 
         if (this._discreteGpuAvailable === undefined) {
             const updateDiscreteGpuAvailable = () => {
@@ -1907,8 +1781,6 @@ export class DockManager {
 
         // Connect relevant signals to the toggling function
         this._bindSettingsChanges();
-
-        this._ensureLocations();
 
         /* Array of all the docks created */
         this._allDocks = [];
@@ -1962,40 +1834,12 @@ export class DockManager {
         return this._windowTracker;
     }
 
-    get fm1Client() {
-        return this._fm1Client;
-    }
-
-    get remoteModel() {
-        return this._remoteModel;
-    }
-
     get mainDock() {
         return this._allDocks[0] ?? null;
     }
 
-    get removables() {
-        return this._removables;
-    }
-
-    get trash() {
-        return this._trash;
-    }
-
-    get desktopIconsUsableArea() {
-        return this._desktopIconsUsableArea;
-    }
-
     get discreteGpuAvailable() {
         return AppDisplay.discreteGpuAvailable || this._discreteGpuAvailable;
-    }
-
-    get appSpread() {
-        return this._appSpread;
-    }
-
-    get notificationsMonitor() {
-        return this._notificationsMonitor;
     }
 
     getDockByMonitor(monitorIndex) {
@@ -2006,97 +1850,12 @@ export class DockManager {
         this._strutsManager?.setMonitorExtent(monitorIndex, extent);
     }
 
-    _ensureLocations() {
-        const {showMounts, showTrash} = this.settings;
-
-        if (showTrash || showMounts) {
-            if (!this._fm1Client)
-                this._fm1Client = new FileManager1API.FileManager1Client();
-        } else if (this._fm1Client) {
-            this._fm1Client.destroy();
-            this._fm1Client = null;
-        }
-
-        if (showMounts && !this._removables) {
-            this._removables = new Locations.Removables();
-        } else if (!showMounts && this._removables) {
-            this._removables.destroy();
-            this._removables = null;
-        }
-
-        if (showTrash && !this._trash) {
-            this._trash = new Locations.Trash();
-        } else if (!showTrash && this._trash) {
-            this._trash.destroy();
-            this._trash = null;
-        }
-
-        Locations.unWrapFileManagerApp();
-        [this._methodInjections, this._propertyInjections].forEach(
-            injections => injections.removeWithLabel(Labels.LOCATIONS));
-
-        if (showMounts || showTrash) {
-            if (this.settings.isolateLocations) {
-                const fileManagerApp = Locations.wrapFileManagerApp();
-
-                this._methodInjections.addWithLabel(Labels.LOCATIONS, [
-                    Shell.AppSystem.prototype, 'get_running',
-                    function (originalMethod, ...args) {
-                        /* eslint-disable no-invalid-this */
-                        const runningApps = originalMethod.call(this, ...args);
-                        const locationApps = Locations.getRunningApps();
-                        if (!locationApps.length)
-                            return runningApps;
-
-                        const fileManagerIdx = runningApps.indexOf(fileManagerApp);
-                        if (fileManagerIdx > -1 && fileManagerApp?.state !== Shell.AppState.RUNNING)
-                            runningApps.splice(fileManagerIdx, 1);
-
-                        return [...runningApps, ...locationApps].sort(Utils.shellAppCompare);
-                        /* eslint-enable no-invalid-this */
-                    },
-                ],
-                [
-                    Shell.WindowTracker.prototype, 'get_window_app',
-                    function (originalMethod, window) {
-                        /* eslint-disable no-invalid-this */
-                        const locationApp = Locations.getRunningApps().find(a =>
-                            a.get_windows().includes(window));
-                        return locationApp ?? originalMethod.call(this, window);
-                        /* eslint-enable no-invalid-this */
-                    },
-                ],
-                [
-                    Shell.WindowTracker.prototype, 'get_app_from_pid',
-                    function (originalMethod, pid) {
-                        /* eslint-disable no-invalid-this */
-                        const locationApp = Locations.getRunningApps().find(a =>
-                            a.get_pids().includes(pid));
-                        return locationApp ?? originalMethod.call(this, pid);
-                        /* eslint-enable no-invalid-this */
-                    },
-                ]);
-
-                const {get: defaultFocusAppGetter} = Object.getOwnPropertyDescriptor(
-                    Shell.WindowTracker.prototype, 'focus_app');
-                this._propertyInjections.addWithLabel(Labels.LOCATIONS,
-                    Shell.WindowTracker.prototype, 'focus_app', {
-                        get() {
-                            const locationApp = Locations.getRunningApps().find(a => a.isFocused);
-                            return locationApp ?? defaultFocusAppGetter.call(this);
-                        },
-                    });
-            }
-        }
-    }
-
     _toggle() {
         if (this._toggleLater)
             return;
 
         this._toggleLater = Utils.laterAdd(Meta.LaterType.BEFORE_REDRAW, () => {
             delete this._toggleLater;
-            this._restoreDash();
             this._deleteDocks();
             this._createDocks();
             this.emit('toggled');
@@ -2188,25 +1947,6 @@ export class DockManager {
             this._settings,
             'changed::dock-fixed',
             () => this._adjustPanelCorners(),
-        ], [
-            this._settings,
-            'changed::show-trash',
-            () => this._ensureLocations(),
-        ], [
-            this._settings,
-            'changed::show-mounts',
-            () => this._ensureLocations(),
-        ], [
-            this._settings,
-            'changed::isolate-locations',
-            () => this._ensureLocations(),
-        ], [
-            this._settings,
-            'changed::intellihide',
-            () => {
-                if (!this._settings.intellihide)
-                    this._desktopIconsUsableArea.resetMargins();
-            },
         ]);
 
         this._mapExternalSetting(this._appSwitcherSettings, 'current-workspace-only',
@@ -2258,9 +1998,6 @@ export class DockManager {
             isMain: true,
         });
 
-        // Make the necessary changes to Main.overview.dash
-        this._prepareMainDash();
-
         // Adjust corners if necessary
         this._adjustPanelCorners();
 
@@ -2287,9 +2024,6 @@ export class DockManager {
         this._allDocks.push(dock);
 
         // connect app icon into the view selector
-        dock.dash.showAppsButton.connectObject('notify::checked',
-            button => this._onShowAppsButtonToggled(button), dock);
-
         this._signalsHandler.add([
             dock,
             'notify::dock-state',
@@ -2358,377 +2092,12 @@ export class DockManager {
         });
     }
 
-    _prepareMainDash() {
-        this._propertyInjections.removeWithLabel(Labels.MAIN_DASH);
 
-        // Ensure Main.overview.dash is set to our dash in dummy mode
-        // while just use the default getter otherwise.
-        if (Main.overview.isDummy) {
-            this._propertyInjections.addWithLabel(Labels.MAIN_DASH, Main.overview, 'dash', {
-                get: () => this.mainDock.dash,
-            });
-
-            return;
-        }
-
-        // Hide usual Dash
-        this._oldDash.hide();
-
-        // Also set dash width to 1, so it's almost not taken into account by code
-        // calculating the reserved space in the overview. The reason to keep it at 1 is
-        // to allow its visibility change to trigger an allocation of the appGrid which
-        // in turn is triggering the appsIcon spring animation, required when no other
-        // actors has this effect, i.e in horizontal mode and without the workspaceThumbnails
-        // 1 static workspace only)
-        this._oldDash.set_height(1);
-
-        this._signalsHandler.addWithLabel(Labels.OLD_DASH_CHANGES, [
-            this._oldDash,
-            'notify::visible',
-            () => this._oldDash.hide(),
-        ], [
-            this._oldDash,
-            'notify::height',
-            () => this._oldDash.set_height(1),
-        ]);
-
-        // Pretend I'm the dash: meant to make app grid swarm animation come from
-        // the right position of the appShowButton.
-        const replaceMainDash = () => {
-            this.overviewControls.dash = this.mainDock.dash;
-            this.searchController._showAppsButton = this.mainDock.dash.showAppsButton;
-
-            // And to return the preferred height depending on the state
-            this._methodInjections.addWithLabel(Labels.MAIN_DASH, this._oldDash,
-                'get_preferred_height', (_originalMethod, ...args) => {
-                    if (this.mainDock.isHorizontal && !this.settings.dockFixed)
-                        return this.mainDock.get_preferred_height(...args);
-                    return [0, 0];
-                });
-        };
-
-        // We also need to ignore max-size changes
-        this._methodInjections.addWithLabel(Labels.MAIN_DASH, this._oldDash,
-            'setMaxSize', () => {});
-        this._methodInjections.addWithLabel(Labels.MAIN_DASH, this._oldDash,
-            'allocate', () => {});
-        // And to return the preferred height depending on the state
-        this._methodInjections.addWithLabel(Labels.MAIN_DASH, this._oldDash,
-            'get_preferred_height', () => [0, 0]);
-
-        const ControlsManagerLayout = this.overviewControls.layout_manager.constructor;
-
-        const maybeAdjustBoxSize = (state, box, spacing) => {
-            // ensure that an undefined value will be converted into a valid one
-            spacing = spacing ?? 0;
-
-            if (state === OverviewControls.ControlsState.WINDOW_PICKER) {
-                const searchBox = this.overviewControls._searchEntry.get_allocation_box();
-                const {shouldShow: wsThumbnails} = this.overviewControls._thumbnailsBox;
-
-                if (!wsThumbnails) {
-                    box.y1 += spacing;
-                    box.y2 -= spacing;
-                }
-
-                box.y2 -= searchBox.get_height() + 2 * spacing;
-            }
-
-            return box;
-        };
-
-        const maybeLimitWorkspaceBoxSize = (box, monitorIndex) => {
-            if (!Meta.prefs_get_dynamic_workspaces() &&
-                Meta.prefs_get_num_workspaces() <= 1)
-                return box;
-
-            if (global.workspaceManager.layout_rows === -1)
-                return box;
-
-            // Workspaces preserve the monitor work area aspect ratio, so when
-            // the dock reduces the available width we must reduce the height
-            // too, otherwise the current workspace fills the whole box and
-            // pushes the adjacent ones outside of the visible area.
-            const workArea = Main.layoutManager.getWorkAreaForMonitor(monitorIndex);
-            if (workArea.width <= 0 || workArea.height <= 0)
-                return box;
-
-            const aspectRatio = workArea.width / workArea.height;
-            const maxWidthRatio = Math.clamp(
-                WorkspaceLayout.MAX_WIDTH_RATIO * aspectRatio /
-                    WorkspaceLayout.WIDE_ASPECT_RATIO,
-                WorkspaceLayout.MIN_WIDTH_RATIO, WorkspaceLayout.MAX_WIDTH_RATIO);
-            const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
-            const maxWorkspaceWidth = Math.min(
-                box.get_width() - 2 * WorkspaceLayout.MIN_SPACING * scaleFactor,
-                box.get_width() * maxWidthRatio);
-            const maxHeight = maxWorkspaceWidth * workArea.height / workArea.width;
-
-            if (maxHeight <= 0 || box.get_height() <= maxHeight)
-                return box;
-
-            const centerY = (box.y1 + box.y2) / 2;
-            const height = Math.round(maxHeight);
-            box.y1 = Math.round(centerY - height / 2);
-            box.y2 = box.y1 + height;
-
-            return box;
-        };
-
-        const maybeAdjustBoxToDock = (state, box, spacing) => {
-            if (Main.layoutManager._startingUp)
-                return box;
-
-            maybeAdjustBoxSize(state, box, spacing);
-
-            if (this.mainDock.isHorizontal || this.settings.dockFixed)
-                return box;
-
-            const [, preferredWidth] = this.mainDock.get_preferred_width(
-                box.get_height());
-
-            if (this.mainDock.position === St.Side.LEFT)
-                box.x1 += preferredWidth;
-            else if (this.mainDock.position === St.Side.RIGHT)
-                box.x2 -= preferredWidth;
-
-            return box;
-        };
-
-        this._vfuncInjections.addWithLabel(Labels.MAIN_DASH, ControlsManagerLayout.prototype,
-            'allocate', function (container) {
-                /* eslint-disable no-invalid-this */
-                const oldPostAllocation = this._runPostAllocation;
-                this._runPostAllocation = () => {};
-
-                const monitor = Main.layoutManager.findMonitorForActor(container);
-                const workArea = Main.layoutManager.getWorkAreaForMonitor(monitor.index);
-                const startX = workArea.x - monitor.x;
-                const startY = workArea.y - monitor.y;
-                const workAreaBox = new Clutter.ActorBox();
-                workAreaBox.set_origin(startX, startY);
-                workAreaBox.set_size(workArea.width, workArea.height);
-
-                // GNOME 46 changes "spacing" to "_spacing".
-                const spacing = this.spacing ?? this._spacing;
-
-                maybeAdjustBoxToDock(undefined, workAreaBox, spacing);
-                const oldStartY = workAreaBox.y1;
-
-                const propertyInjections = new Utils.PropertyInjectionsHandler();
-                propertyInjections.add(Main.layoutManager.panelBox, 'height', {value: startY});
-
-                if (Main.layoutManager.panelBox.y === Main.layoutManager.primaryMonitor.y)
-                    workAreaBox.y1 -= oldStartY;
-
-                this.vfunc_allocate(container, workAreaBox);
-
-                propertyInjections.destroy();
-                workAreaBox.y1 = oldStartY;
-
-                const adjustActorHorizontalAllocation = actor => {
-                    if (!actor.visible || !workAreaBox.x1)
-                        return;
-
-                    const contentBox = actor.get_allocation_box();
-                    contentBox.set_size(workAreaBox.get_width(), contentBox.get_height());
-                    contentBox.set_origin(workAreaBox.x1, contentBox.y1);
-                    actor.allocate(contentBox);
-                };
-
-                [this._searchEntry, this._workspacesThumbnails, this._searchController].forEach(
-                    actor => adjustActorHorizontalAllocation(actor));
-
-                this._runPostAllocation = oldPostAllocation;
-                this._runPostAllocation();
-                /* eslint-enable no-invalid-this */
-            });
-
-        /**
-         * This can be removed or bypassed when GNOME/gnome-shell!1892 will be merged
-         *
-         * @param originalFunction
-         * @param state
-         * @param workAreaBox
-         * @param {...any} args
-         */
-        function workspaceBoxOriginFixer(originalFunction, state, workAreaBox, ...args) {
-            /* eslint-disable no-invalid-this */
-            const workspaceBox = originalFunction.call(this, state, workAreaBox, ...args);
-            workspaceBox.set_origin(workAreaBox.x1, workspaceBox.y1);
-            return workspaceBox;
-            /* eslint-enable no-invalid-this */
-        }
-
-        this._methodInjections.addWithLabel(Labels.MAIN_DASH, [
-            ControlsManagerLayout.prototype,
-            '_computeWorkspacesBoxForState',
-            function (originalFunction, state, ...args) {
-                /* eslint-disable no-invalid-this */
-                if (state === OverviewControls.ControlsState.HIDDEN)
-                    return originalFunction.call(this, state, ...args);
-
-                const box = workspaceBoxOriginFixer.call(this, originalFunction, state, ...args);
-                const dock = DockManager.getDefault().getDockByMonitor(Main.layoutManager.primaryIndex);
-                if (!dock)
-                    return box;
-
-                // GNOME 46 changes "spacing" to "_spacing".
-                const spacing = this.spacing ?? this._spacing;
-                const adjustedBox = maybeAdjustBoxSize(state, box, spacing);
-
-                if (state === OverviewControls.ControlsState.WINDOW_PICKER) {
-                    return maybeLimitWorkspaceBoxSize(
-                        adjustedBox, Main.layoutManager.primaryIndex);
-                }
-
-                return adjustedBox;
-                /* eslint-enable no-invalid-this */
-            },
-        ], [
-            WorkspacesView.SecondaryMonitorDisplay.prototype,
-            '_getWorkspacesBoxForState',
-            function (originalFunction, state, ...args) {
-                /* eslint-disable no-invalid-this */
-                if (state === OverviewControls.ControlsState.HIDDEN)
-                    return originalFunction.call(this, state, ...args);
-
-                const box = workspaceBoxOriginFixer.call(this, originalFunction, state, ...args);
-                const dock = DockManager.getDefault().getDockByMonitor(this._monitorIndex);
-                if (!dock)
-                    return box;
-
-                if (state !== OverviewControls.ControlsState.WINDOW_PICKER)
-                    return box;
-
-                if (dock.position === St.Side.BOTTOM) {
-                    const [, preferredHeight] = dock.get_preferred_height(box.get_width());
-                    box.y2 -= preferredHeight;
-                }
-
-                if (this._workspacesView instanceof WorkspacesView.ExtraWorkspaceView)
-                    return box;
-
-                return maybeLimitWorkspaceBoxSize(box, this._monitorIndex);
-                /* eslint-enable no-invalid-this */
-            },
-        ], [
-            ControlsManagerLayout.prototype,
-            '_getAppDisplayBoxForState',
-            function (originalFunction, ...args) {
-                /* eslint-disable no-invalid-this */
-                return workspaceBoxOriginFixer.call(this, originalFunction, ...args);
-                /* eslint-enable no-invalid-this */
-            },
-        ], [
-            // Sadly CtrlAltTabPopup is not exported, so we cannot just patch it.
-            SwitcherPopup.SwitcherPopup.prototype,
-            '_finish',
-            function (originalFunction, ...args) {
-                /* eslint-disable no-invalid-this */
-                if (this.constructor.name === 'CtrlAltTabPopup') {
-                    const dockManager = DockManager.getDefault();
-                    if (dockManager._inCtrlAltTabSwitcher)
-                        return;
-
-                    dockManager._inCtrlAltTabSwitcher = true;
-                    this.constructor.prototype._finish.call(this, ...args);
-                    delete dockManager._inCtrlAltTabSwitcher;
-                }
-                originalFunction.call(this, ...args);
-                /* eslint-enable no-invalid-this */
-            },
-        ]);
-
-        this._vfuncInjections.addWithLabel(Labels.MAIN_DASH, Workspace.WorkspaceBackground.prototype,
-            'allocate', function (box) {
-                /* eslint-disable no-invalid-this */
-                this.vfunc_allocate(box);
-
-                // This code has been submitted upstream via GNOME/gnome-shell!1892
-                // so can be removed when that gets merged (or bypassed on newer shell
-                // versions).
-                const monitor = Main.layoutManager.monitors[this._monitorIndex];
-                const [contentWidth, contentHeight] = this._bin.get_content_box().get_size();
-                const [mX1, mX2] = [monitor.x, monitor.x + monitor.width];
-                const [mY1, mY2] = [monitor.y, monitor.y + monitor.height];
-                const [wX1, wX2] = [this._workarea.x, this._workarea.x + this._workarea.width];
-                const [wY1, wY2] = [this._workarea.y, this._workarea.y + this._workarea.height];
-                const xScale = contentWidth / this._workarea.width;
-                const yScale = contentHeight / this._workarea.height;
-                const leftOffset = wX1 - mX1;
-                const topOffset = wY1 - mY1;
-                const rightOffset = mX2 - wX2;
-                const bottomOffset = mY2 - wY2;
-
-                const contentBox = new Clutter.ActorBox();
-                contentBox.set_origin(-leftOffset * xScale, -topOffset * yScale);
-                contentBox.set_size(
-                    contentWidth + (leftOffset + rightOffset) * xScale,
-                    contentHeight + (topOffset + bottomOffset) * yScale);
-
-                this._backgroundGroup.allocate(contentBox);
-                /* eslint-enable no-invalid-this */
-            });
-
-        // Reduce the space that the workspaces can use in secondary monitors
-        this._methodInjections.addWithLabel(Labels.MAIN_DASH, WorkspacesView.WorkspacesView.prototype,
-            '_getFirstFitAllWorkspaceBox', function (originalFunction, ...args) {
-                /* eslint-disable no-invalid-this */
-                const box = originalFunction.call(this, ...args);
-                if (DockManager.settings.dockFixed ||
-                    this._monitorIndex === Main.layoutManager.primaryIndex)
-                    return box;
-
-                const dock = DockManager.getDefault().getDockByMonitor(this._monitorIndex);
-                if (!dock)
-                    return box;
-
-                if (dock.isHorizontal) {
-                    const [, preferredHeight] = dock.get_preferred_height(box.get_width());
-                    box.y2 -= preferredHeight;
-                    if (dock.position === St.Side.TOP)
-                        box.set_origin(box.x1, box.y1 + preferredHeight);
-                } else {
-                    const [, preferredWidth] = dock.get_preferred_width(box.get_height());
-                    box.x2 -= preferredWidth / 2;
-                    if (dock.position === St.Side.LEFT)
-                        box.set_origin(box.x1 + preferredWidth, box.y1);
-                }
-                return box;
-                /* eslint-enable no-invalid-this */
-            });
-
-        if (Main.layoutManager._startingUp) {
-            // Use a dummy actor as dash during the startup animation, until
-            // we're done with it, so that nothing is really shown or modified
-            // during the upstream startup animation, that still requires to
-            // have a valid actor.
-            const dummyDash = new Clutter.Actor({visible: false, opacity: 0});
-            dummyDash.showAppsButton = {};
-            Object.defineProperty(dummyDash.showAppsButton, 'checked', {
-                get: () => false,
-                set: () => {},
-            });
-            this.overviewControls.dash = dummyDash;
-            Main.uiGroup.add_child(dummyDash);
-
-            this._signalsHandler.addWithLabel(Labels.STARTUP_ANIMATION,
-                Main.layoutManager, 'startup-complete', () => {
-                    this._signalsHandler.removeWithLabel(Labels.STARTUP_ANIMATION);
-                    replaceMainDash();
-                    dummyDash.destroy();
-                });
-        } else {
-            replaceMainDash();
-        }
-    }
 
     _deleteDocks() {
         // Remove extra features
         this._workspaceIsolation?.destroy();
         this._keyboardShortcuts?.destroy();
-        this._desktopIconsUsableArea?.resetMargins();
         this._strutsManager?.clear();
 
         // Delete all docks
@@ -2737,56 +2106,9 @@ export class DockManager {
         this._updateUnredirect();
     }
 
-    _restoreDash() {
-        if (!this._oldDash || this.overviewControls.dash === this._oldDash)
-            return;
-
-        this._signalsHandler.removeWithLabel(Labels.OLD_DASH_CHANGES);
-        [this._methodInjections, this._vfuncInjections, this._propertyInjections].forEach(
-            injections => injections.removeWithLabel(Labels.MAIN_DASH));
-
-        this.overviewControls.layout_manager._dash = this._oldDash;
-        this.overviewControls.dash = this._oldDash;
-        this.searchController._showAppsButton = this._oldDash.showAppsButton;
-        Main.overview.dash.show();
-        Main.overview.dash.set_height(-1); // reset default dash size
-        // This force the recalculation of the icon size
-        Main.overview.dash._maxHeight = -1;
-    }
-
-    get overviewControls() {
-        return Main.overview._overview.controls;
-    }
-
-    get searchController() {
-        return this.overviewControls._searchController;
-    }
-
-    _onShowAppsButtonToggled(button) {
-        const {checked} = button;
-        const {overviewControls} = this;
-
-        if (!Main.overview.visible) {
-            this.mainDock.dash.showAppsButton._fromDesktop = true;
-            Main.overview.show(OverviewControls.ControlsState.APP_GRID);
-        } else if (!checked && this.mainDock.dash.showAppsButton._fromDesktop &&
-            !this._inCtrlAltTabSwitcher) {
-            Main.overview.hide();
-            this.mainDock.dash.showAppsButton._fromDesktop = false;
-        } else {
-            // TODO: I'm not sure how reliable this is, we might need to move the
-            // _onShowAppsButtonToggled logic into the extension.
-            if (!checked)
-                this.mainDock.dash.showAppsButton._fromDesktop = false;
 
 
-            // Instead of "syncing" the stock button, let's call its callback directly.
-            overviewControls._onShowAppsButtonToggled();
-        }
 
-        // Because we "disconnected" from the search controller, we have to manage its state.
-        this.searchController._setSearchActive(false);
-    }
 
     destroy() {
         try {
@@ -2795,32 +2117,12 @@ export class DockManager {
                 Utils.laterRemove(this._toggleLater);
                 delete this._toggleLater;
             }
-            this._restoreDash();
             this._deleteDocks();
             this._revertPanelCorners();
-            if (this._oldSelectorMargin)
-                this.searchController.margin_bottom = this._oldSelectorMargin;
-            if (this._fm1Client) {
-                this._fm1Client.destroy();
-                this._fm1Client = null;
-            }
-            this._notificationsMonitor.destroy();
-            this._appSpread.destroy();
-            this._trash?.destroy();
-            this._trash = null;
-            Locations.unWrapFileManagerApp();
-            this._removables?.destroy();
-            this._removables = null;
             this._iconTheme = null;
-            this._remoteModel?.destroy();
-            this._appIconsDecorator?.destroy();
             this._settings = null;
             this._appSwitcherSettings = null;
             this._windowTracker = null;
-            this._oldDash = null;
-
-            this._desktopIconsUsableArea?.destroy();
-            this._desktopIconsUsableArea = null;
 
             this._strutsManager?.destroy();
             this._strutsManager = null;
@@ -2863,7 +2165,6 @@ export class DockManager {
         return !!Main.panel?._rightCorner && !!Main.panel?._leftCorner;
     }
 }
-Signals.addSignalMethods(DockManager.prototype);
 
 // This class drives long-running icon animations, to keep them running in sync
 // with each other, and to save CPU by pausing them when the dock is hidden.
